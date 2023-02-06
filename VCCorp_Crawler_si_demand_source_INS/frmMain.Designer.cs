@@ -29,33 +29,34 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grSiDemand = new System.Windows.Forms.GroupBox();
             this.btnSourcStatus0 = new System.Windows.Forms.Button();
             this.btnFindsourceID = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnCmtINS = new System.Windows.Forms.Button();
             this.btnPostINS = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grSiDataExcel = new System.Windows.Forms.GroupBox();
             this.btnINS = new System.Windows.Forms.Button();
             this.btnCrwSidataExcel = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.pnLogin = new System.Windows.Forms.Panel();
+            this.grSiDemand.SuspendLayout();
+            this.grSiDataExcel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // grSiDemand
             // 
-            this.groupBox1.Controls.Add(this.btnSourcStatus0);
-            this.groupBox1.Controls.Add(this.btnFindsourceID);
-            this.groupBox1.Controls.Add(this.btnLogin);
-            this.groupBox1.Controls.Add(this.btnCmtINS);
-            this.groupBox1.Controls.Add(this.btnPostINS);
-            this.groupBox1.Location = new System.Drawing.Point(12, 25);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(762, 110);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "CHỌN CHỨC NĂNG_ Data lquan đến bảng Si_Demand";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.grSiDemand.Controls.Add(this.btnSourcStatus0);
+            this.grSiDemand.Controls.Add(this.btnFindsourceID);
+            this.grSiDemand.Controls.Add(this.btnLogin);
+            this.grSiDemand.Controls.Add(this.btnCmtINS);
+            this.grSiDemand.Controls.Add(this.btnPostINS);
+            this.grSiDemand.Location = new System.Drawing.Point(12, 25);
+            this.grSiDemand.Name = "grSiDemand";
+            this.grSiDemand.Size = new System.Drawing.Size(762, 110);
+            this.grSiDemand.TabIndex = 3;
+            this.grSiDemand.TabStop = false;
+            this.grSiDemand.Text = "CHỌN CHỨC NĂNG_ Data lquan đến bảng Si_Demand";
+            this.grSiDemand.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnSourcStatus0
             // 
@@ -108,16 +109,16 @@
             this.btnPostINS.UseVisualStyleBackColor = false;
             this.btnPostINS.Click += new System.EventHandler(this.btnPostINS_Click);
             // 
-            // groupBox2
+            // grSiDataExcel
             // 
-            this.groupBox2.Controls.Add(this.btnINS);
-            this.groupBox2.Controls.Add(this.btnCrwSidataExcel);
-            this.groupBox2.Location = new System.Drawing.Point(12, 141);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(762, 112);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "CHỌN CHỨC NĂNG_ Data lquan Đến bảng si_crawl_data_excel";
+            this.grSiDataExcel.Controls.Add(this.btnINS);
+            this.grSiDataExcel.Controls.Add(this.btnCrwSidataExcel);
+            this.grSiDataExcel.Location = new System.Drawing.Point(787, 25);
+            this.grSiDataExcel.Name = "grSiDataExcel";
+            this.grSiDataExcel.Size = new System.Drawing.Size(443, 112);
+            this.grSiDataExcel.TabIndex = 5;
+            this.grSiDataExcel.TabStop = false;
+            this.grSiDataExcel.Text = "CHỌN CHỨC NĂNG_ Data lquan Đến bảng si_crawl_data_excel";
             // 
             // btnINS
             // 
@@ -139,35 +140,44 @@
             this.btnCrwSidataExcel.UseVisualStyleBackColor = true;
             this.btnCrwSidataExcel.Click += new System.EventHandler(this.btnCrwSidataExcel_Click);
             // 
+            // pnLogin
+            // 
+            this.pnLogin.Location = new System.Drawing.Point(12, 143);
+            this.pnLogin.Name = "pnLogin";
+            this.pnLogin.Size = new System.Drawing.Size(1218, 618);
+            this.pnLogin.TabIndex = 6;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 271);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1251, 773);
+            this.Controls.Add(this.pnLogin);
+            this.Controls.Add(this.grSiDataExcel);
+            this.Controls.Add(this.grSiDemand);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crawl Data Instaram";
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.frmMain_LoadAsync);
+            this.grSiDemand.ResumeLayout(false);
+            this.grSiDataExcel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grSiDemand;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnCmtINS;
         private System.Windows.Forms.Button btnPostINS;
         private System.Windows.Forms.Button btnFindsourceID;
         private System.Windows.Forms.Button btnSourcStatus0;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grSiDataExcel;
         private System.Windows.Forms.Button btnCrwSidataExcel;
         private System.Windows.Forms.Button btnINS;
+        private System.Windows.Forms.Panel pnLogin;
     }
 }
 

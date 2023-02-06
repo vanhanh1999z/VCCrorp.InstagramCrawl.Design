@@ -78,5 +78,10 @@ namespace VCCorp_Crawler_si_demand_source_INS
             _loading = 0;
             browser.Load(txtAddress.Text);
         }
+
+        private void loginINS_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -82,6 +82,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "loginINS";
             this.Text = "loginINS";
+            this.Load += new System.EventHandler(this.loginINS_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

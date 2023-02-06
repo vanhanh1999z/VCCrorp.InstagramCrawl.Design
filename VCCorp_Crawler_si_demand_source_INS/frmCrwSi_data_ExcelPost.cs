@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.Common;
 using VCCorp.CrawlerCore.DTO;
+using VCCorp_Crawler_si_demand_source_INS.Config;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -24,7 +25,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
         private int _loading;
         public ChromiumWebBrowser browser;
         List<INSSidataExcelPostDTO> _listSidataExcelource;
-        INSSidataExcelPostBUS _bll = new INSSidataExcelPostBUS();
+        INSSidataExcelPostBUS _bll = new INSSidataExcelPostBUS(IgRunTime.Config.DbConnection.FBExce);
         int _count = 0;
         private int _flag;
         private int _indexCurr; // vị trí hiện hành của url bóc
@@ -178,7 +179,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                             entrydatapost.si_demand_source_id = _strId;
                             entrydatapost.post_id = data.id;
                             _strPostId = entrydatapost.post_id;
-                            entrydatapost.shortcode =  data.code;
+                            entrydatapost.shortcode = data.code;
                             entrydatapost.link = "https://www.instagram.com/p/" + entrydatapost.shortcode;
                             entrydatapost.total_comment = data.comment_count;
                             entrydatapost.total_like = data.like_count;
@@ -193,7 +194,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                                 entrydatapost.creat_time = UnixTimeStampToDateTime(data.device_timestamp);
                             }
                             catch { }
-                            
+
                             entrydatapost.TimeCrw = DateTime.Now;
                             try
                             {
@@ -223,7 +224,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                                 entrydatapost.imagePost = data.carousel_media[0].image_versions2.candidates[0].url;
                             }
                             catch { }
-                                
+
                             #region bắn lên kafa
                             //Bắn Post lên kafa
                             //Khai báo class bắn lên kafa
@@ -253,7 +254,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                             _bll.insertposthistory(entrydatapost);
                         }
                     }
-                   
+
                 }
                 else
                 {
@@ -353,7 +354,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
         private void Crawler()
         {
             CrawlerAndSend();
-            
+
 
         }
 

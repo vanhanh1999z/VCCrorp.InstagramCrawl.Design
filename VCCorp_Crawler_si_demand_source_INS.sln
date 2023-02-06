@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VCCorp_Crawler_si_demand_so
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VCCorp.CrawlerCore", "..\VCCorp.CrawlerCore\VCCorp.CrawlerCore\VCCorp.CrawlerCore.csproj", "{074D63C2-68EF-46BA-A85F-ED72CF876C46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crwal.Core", "..\..\..\Crawl_Core\Crwal.Core\Crwal.Core\Crwal.Core.csproj", "{372DE665-B14B-4D3F-AAD4-781E8A0EF48D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{074D63C2-68EF-46BA-A85F-ED72CF876C46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{074D63C2-68EF-46BA-A85F-ED72CF876C46}.Release|x64.ActiveCfg = Release|x64
 		{074D63C2-68EF-46BA-A85F-ED72CF876C46}.Release|x64.Build.0 = Release|x64
+		{372DE665-B14B-4D3F-AAD4-781E8A0EF48D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{372DE665-B14B-4D3F-AAD4-781E8A0EF48D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{372DE665-B14B-4D3F-AAD4-781E8A0EF48D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{372DE665-B14B-4D3F-AAD4-781E8A0EF48D}.Debug|x64.Build.0 = Debug|Any CPU
+		{372DE665-B14B-4D3F-AAD4-781E8A0EF48D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{372DE665-B14B-4D3F-AAD4-781E8A0EF48D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{372DE665-B14B-4D3F-AAD4-781E8A0EF48D}.Release|x64.ActiveCfg = Release|Any CPU
+		{372DE665-B14B-4D3F-AAD4-781E8A0EF48D}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

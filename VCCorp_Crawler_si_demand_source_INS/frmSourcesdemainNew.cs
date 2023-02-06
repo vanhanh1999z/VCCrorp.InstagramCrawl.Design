@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.Common;
 using VCCorp.CrawlerCore.DTO;
+using VCCorp_Crawler_si_demand_source_INS.Config;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -24,8 +25,8 @@ namespace VCCorp_Crawler_si_demand_source_INS
         private int _loading;
         public ChromiumWebBrowser browser;
         List<INSsidemandsourceDTO> _listsidemandsource;
-        INSsidemandsourceBUS _bll = new INSsidemandsourceBUS();
-        INSsidemandsourcepostBUS _bllpost = new INSsidemandsourcepostBUS();
+        INSsidemandsourceBUS _bll = new INSsidemandsourceBUS(IgRunTime.Config.DbConnection.FBExce);
+        INSsidemandsourcepostBUS _bllpost = new INSsidemandsourcepostBUS(IgRunTime.Config.DbConnection.FBExce);
         int _count = 0;
         private int _flag;
         private int _indexCurr; // vị trí hiện hành của url bóc
@@ -271,7 +272,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
         private void Crawler()
         {
             CrawlerAndSend();
-            
+
         }
 
         /// <summary>

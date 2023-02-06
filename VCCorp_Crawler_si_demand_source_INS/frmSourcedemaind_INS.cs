@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.Common;
 using VCCorp.CrawlerCore.DTO;
+using VCCorp_Crawler_si_demand_source_INS.Config;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -24,8 +25,8 @@ namespace VCCorp_Crawler_si_demand_source_INS
         private int _loading;
         public ChromiumWebBrowser browser;
         List<INSsidemandsourceDTO> _listsidemandsource;
-        INSsidemandsourceBUS _bll = new INSsidemandsourceBUS();
-        INSsidemandsourcepostBUS _bllpost = new INSsidemandsourcepostBUS();
+        INSsidemandsourceBUS _bll = new INSsidemandsourceBUS(IgRunTime.Config.DbConnection.FBExce);
+        INSsidemandsourcepostBUS _bllpost = new INSsidemandsourcepostBUS(IgRunTime.Config.DbConnection.FBExce);
         int _count = 0;
         private int _flag;
         private int _indexCurr; // vị trí hiện hành của url bóc
@@ -388,20 +389,16 @@ namespace VCCorp_Crawler_si_demand_source_INS
         private void timerStart_Tick(object sender, EventArgs e)
         {
             timerStart.Interval = 1000;
-
             if (_loading == 0)
             {
                 return;
             }
-
             if (_listsidemandsource == null || _listsidemandsource.Count == 0)
             {
                 lbToolStripStatus.Text = "không có link nào để bóc - Dừng chạy";
                 timerStart.Enabled = false;
                 timerStart.Stop();
-
                 btStart.Enabled = true;
-
                 return;
             }
 
@@ -414,29 +411,20 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     _flag = 10; // xong 1 vòng
                     return;
                 }
-
                 if (_indexCurr == 0)
                 {
                     //_blockNameLog = DateTime.Now.ToString("HH") + "_gio_" + DateTime.Now.ToString("mm") + "_phut_" + DateTime.Now.ToString("ss") + "_giay"; // tên log file 1 vòng
                 }
-
                 lbLinkIndexCurr.Text = _indexCurr.ToString();
-
                 txtAddress.Text = _listsidemandsource[_indexCurr].link;
                 _loading = 0;
                 browser.Load(txtAddress.Text);
-
                 int sec = 15;
-
                 Random ran = new Random();
                 sec = ran.Next(20, 30);
-
                 timerStart.Interval = 1000 * sec;
-
                 lbToolStripStatus.Text = "loading, xin chờ " + sec + " giây để hoàn thành...";
-
                 _flag = 0;
-
                 return;
                 #endregion
             }
@@ -482,6 +470,11 @@ namespace VCCorp_Crawler_si_demand_source_INS
         private void btStart_Click(object sender, EventArgs e)
         {
             CrawlerAndSend();
+        }
+
+        private void frmSourcedemaind_INS_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

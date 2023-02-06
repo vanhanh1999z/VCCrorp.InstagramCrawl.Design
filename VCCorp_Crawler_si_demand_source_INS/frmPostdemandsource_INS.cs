@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.Common;
 using VCCorp.CrawlerCore.DTO;
+using VCCorp_Crawler_si_demand_source_INS.Config;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -24,7 +25,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
         private int _loading;
         public ChromiumWebBrowser browser;
         List<INSsidemandsourcepostDTO> _listsidemandPost;
-        INSsidemandsourcepostBUS _bll = new INSsidemandsourcepostBUS();
+        INSsidemandsourcepostBUS _bll = new INSsidemandsourcepostBUS(IgRunTime.Config.DbConnection.FBExce);
         List<kafaCommentINSDTO> _listCmt = new List<kafaCommentINSDTO>();
 
         int _count = 0;
@@ -157,7 +158,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 lbToolStripStatus.Text = "Đang bóc INfos " + _listsidemandPost[_indexCurr].link;
                 _strId = _listsidemandPost[_indexCurr].post_id;
                 //update trạng thái đang bóc source
-                _bll.UpdatesidemandPostINS(_strId, "1","");
+                _bll.UpdatesidemandPostINS(_strId, "1", "");
                 string source = GetSourceFromBrowser();
                 //xóa cặp thẻ không cần thiết để trở về định dạng chuẩn json
                 source = Regex.Replace(source, "(<html)(.*?)(pre-wrap;\">)", " ", RegexOptions.IgnoreCase); // xóa cặp thẻ
@@ -179,9 +180,9 @@ namespace VCCorp_Crawler_si_demand_source_INS
                                 entrydataCmt.CommentText = data.node.text;
                             }
                             catch { }
-                            
+
                             entrydataCmt.PostId = _listsidemandPost[_indexCurr].post_id;
-                            entrydataCmt.Url = "https://www.instagram.com/p/"+ _listsidemandPost[_indexCurr].shortcode;
+                            entrydataCmt.Url = "https://www.instagram.com/p/" + _listsidemandPost[_indexCurr].shortcode;
                             entrydataCmt.OwnerId = data.node.owner.id;
                             entrydataCmt.OwnerUser = data.node.owner.username;
                             try
@@ -226,7 +227,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 //gặp lỗi thì cho cờ trở về 2 để cho nó chạy tiếp Url tiếp theo
                 _flag = 2;
                 //update trang thai loi ko boc dc
-               // _bll.UpdatesidemandINS(_strId, "-1");
+                // _bll.UpdatesidemandINS(_strId, "-1");
             }
         }
         /// <summary>
@@ -266,7 +267,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
             {
                 List<INSsidemandsourcepostDTO> listPostINS = new List<INSsidemandsourcepostDTO>();
 
-                string urlpage = "https://www.instagram.com/graphql/query/?query_hash=33ba35852cb50da46f5b5e889df7d159&variables=%7B%22shortcode%22:%22"+ shortcode + "%22,%22first%22:100,%22after%22:%22" +endcursor + "%22%7D";
+                string urlpage = "https://www.instagram.com/graphql/query/?query_hash=33ba35852cb50da46f5b5e889df7d159&variables=%7B%22shortcode%22:%22" + shortcode + "%22,%22first%22:100,%22after%22:%22" + endcursor + "%22%7D";
                 browser.Load(urlpage);
                 Thread.Sleep(6000);
                 string source = GetSourceFromBrowser();
@@ -314,8 +315,8 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     //_bll.UpdatesidemandINS(_strId, "-1");
                 }
             }
-                #endregion
-            
+            #endregion
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);

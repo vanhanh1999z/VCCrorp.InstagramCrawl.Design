@@ -227,6 +227,7 @@
             this.Controls.Add(this.btLoad);
             this.Name = "frmSourcedemaind_INS";
             this.Text = "Bóc source INS";
+            this.Load += new System.EventHandler(this.frmSourcedemaind_INS_Load);
             this.groupLeft.ResumeLayout(false);
             this.groupLeft.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

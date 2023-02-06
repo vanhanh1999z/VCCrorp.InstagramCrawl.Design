@@ -49,8 +49,13 @@
       <HintPath>..\packages\CefSharp.WinForms.107.1.90\lib\net462\CefSharp.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.1.1\lib\net46\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\System.cs" />
     <Compile Include="frmCrwSi_data_ExcelPost.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,7 +152,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Config\system.hcf" />
+    <None Include="Config\system.hcf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -162,6 +170,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Crawl_Core\Crwal.Core\Crwal.Core\Crwal.Core.csproj">
+      <Project>{372de665-b14b-4d3f-aad4-781e8a0ef48d}</Project>
+      <Name>Crwal.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\VCCorp.CrawlerCore\VCCorp.CrawlerCore\VCCorp.CrawlerCore.csproj">
       <Project>{074D63C2-68EF-46BA-A85F-ED72CF876C46}</Project>
       <Name>VCCorp.CrawlerCore</Name>

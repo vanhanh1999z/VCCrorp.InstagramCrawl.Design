@@ -1,0 +1,12 @@
+﻿{
+  "DbConnection": {
+    "22FBExce": "Data Source=localhost,3306;Initial Catalog = social_index_v2; User ID = root; Password = Abcde12345-",
+    "NewsDbLocal": "Data Source=localhost,3306;Initial Catalog = social_index_v2; User ID = root; Password = Abcde12345-"
+  },
+  "Kafka": {
+    "_topicTableName": "datacollection-instagram-crawler",
+    "_commentTableName": "datacollection-instagramcomment-crawler",
+    //"SERVER_LINK": "10.3.48.81:9092,10.3.48.90:9092,10.3.48.91:9092"
+    "SERVER_LINK": "localhost:29092,localhost:39092"
+  }
+}

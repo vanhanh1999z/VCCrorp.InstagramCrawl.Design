@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOneINS));
             this.groupLeft = new System.Windows.Forms.GroupBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lbToolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -44,7 +45,7 @@
             this.groupLeft.Controls.Add(this.statusStrip1);
             this.groupLeft.Location = new System.Drawing.Point(32, 64);
             this.groupLeft.Name = "groupLeft";
-            this.groupLeft.Size = new System.Drawing.Size(1323, 456);
+            this.groupLeft.Size = new System.Drawing.Size(824, 456);
             this.groupLeft.TabIndex = 327;
             this.groupLeft.TabStop = false;
             // 
@@ -54,7 +55,7 @@
             this.lbToolStripStatus});
             this.statusStrip1.Location = new System.Drawing.Point(3, 431);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1317, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(818, 22);
             this.statusStrip1.TabIndex = 285;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -100,17 +101,18 @@
             this.btStart.UseVisualStyleBackColor = true;
             this.btStart.Click += new System.EventHandler(this.btStart_Click);
             // 
-            // frmINS
+            // frmOneINS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1367, 539);
+            this.ClientSize = new System.Drawing.Size(890, 539);
             this.Controls.Add(this.groupLeft);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.btLoad);
             this.Controls.Add(this.btStart);
-            this.Name = "frmINS";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "frmOneINS";
             this.Text = "frmINS";
             this.groupLeft.ResumeLayout(false);
             this.groupLeft.PerformLayout();

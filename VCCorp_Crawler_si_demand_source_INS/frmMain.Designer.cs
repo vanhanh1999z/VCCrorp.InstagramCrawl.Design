@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSourcStatus0 = new System.Windows.Forms.Button();
             this.btnFindsourceID = new System.Windows.Forms.Button();
@@ -48,16 +49,17 @@
             this.groupBox1.Controls.Add(this.btnLogin);
             this.groupBox1.Controls.Add(this.btnCmtINS);
             this.groupBox1.Controls.Add(this.btnPostINS);
-            this.groupBox1.Location = new System.Drawing.Point(110, 35);
+            this.groupBox1.Location = new System.Drawing.Point(12, 25);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(235, 316);
+            this.groupBox1.Size = new System.Drawing.Size(762, 110);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "CHỌN CHỨC NĂNG_ Data lquan đến bảng Si_Demand";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnSourcStatus0
             // 
-            this.btnSourcStatus0.Location = new System.Drawing.Point(23, 250);
+            this.btnSourcStatus0.Location = new System.Drawing.Point(421, 29);
             this.btnSourcStatus0.Name = "btnSourcStatus0";
             this.btnSourcStatus0.Size = new System.Drawing.Size(190, 49);
             this.btnSourcStatus0.TabIndex = 4;
@@ -67,9 +69,9 @@
             // 
             // btnFindsourceID
             // 
-            this.btnFindsourceID.Location = new System.Drawing.Point(23, 193);
+            this.btnFindsourceID.Location = new System.Drawing.Point(617, 29);
             this.btnFindsourceID.Name = "btnFindsourceID";
-            this.btnFindsourceID.Size = new System.Drawing.Size(190, 49);
+            this.btnFindsourceID.Size = new System.Drawing.Size(125, 49);
             this.btnFindsourceID.TabIndex = 3;
             this.btnFindsourceID.Text = "Tìm Source_ID_INS";
             this.btnFindsourceID.UseVisualStyleBackColor = true;
@@ -77,9 +79,9 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(23, 138);
+            this.btnLogin.Location = new System.Drawing.Point(272, 29);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(190, 49);
+            this.btnLogin.Size = new System.Drawing.Size(143, 49);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Đăng nhập INS";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -87,9 +89,9 @@
             // 
             // btnCmtINS
             // 
-            this.btnCmtINS.Location = new System.Drawing.Point(23, 83);
+            this.btnCmtINS.Location = new System.Drawing.Point(136, 29);
             this.btnCmtINS.Name = "btnCmtINS";
-            this.btnCmtINS.Size = new System.Drawing.Size(190, 49);
+            this.btnCmtINS.Size = new System.Drawing.Size(130, 49);
             this.btnCmtINS.TabIndex = 1;
             this.btnCmtINS.Text = "Bóc comment";
             this.btnCmtINS.UseVisualStyleBackColor = true;
@@ -97,28 +99,29 @@
             // 
             // btnPostINS
             // 
+            this.btnPostINS.BackColor = System.Drawing.Color.White;
             this.btnPostINS.Location = new System.Drawing.Point(23, 29);
             this.btnPostINS.Name = "btnPostINS";
-            this.btnPostINS.Size = new System.Drawing.Size(190, 49);
+            this.btnPostINS.Size = new System.Drawing.Size(107, 49);
             this.btnPostINS.TabIndex = 0;
             this.btnPostINS.Text = "Bóc source";
-            this.btnPostINS.UseVisualStyleBackColor = true;
+            this.btnPostINS.UseVisualStyleBackColor = false;
             this.btnPostINS.Click += new System.EventHandler(this.btnPostINS_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnINS);
             this.groupBox2.Controls.Add(this.btnCrwSidataExcel);
-            this.groupBox2.Location = new System.Drawing.Point(372, 35);
+            this.groupBox2.Location = new System.Drawing.Point(12, 141);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(235, 316);
+            this.groupBox2.Size = new System.Drawing.Size(762, 112);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CHỌN CHỨC NĂNG_ Data lquan Đến bảng si_crawl_data_excel";
             // 
             // btnINS
             // 
-            this.btnINS.Location = new System.Drawing.Point(23, 250);
+            this.btnINS.Location = new System.Drawing.Point(219, 29);
             this.btnINS.Name = "btnINS";
             this.btnINS.Size = new System.Drawing.Size(190, 49);
             this.btnINS.TabIndex = 1;
@@ -140,11 +143,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 271);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
-            this.Text = "Chức năng";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Crawl Data Instaram";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);

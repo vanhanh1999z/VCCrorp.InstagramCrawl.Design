@@ -170,14 +170,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Crawl_Core\Crwal.Core\Crwal.Core\Crwal.Core.csproj">
+    <ProjectReference Include="..\..\Crwal.Core\Crwal.Core\Crwal.Core.csproj">
       <Project>{372de665-b14b-4d3f-aad4-781e8a0ef48d}</Project>
       <Name>Crwal.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\VCCorp.CrawlerCore\VCCorp.CrawlerCore\VCCorp.CrawlerCore.csproj">
-      <Project>{074D63C2-68EF-46BA-A85F-ED72CF876C46}</Project>
+    <ProjectReference Include="..\VCCrorp.InstagramCrawl.Core\VCCorp.CrawlerCore\VCCorp.CrawlerCore.csproj">
+      <Project>{074d63c2-68ef-46ba-a85f-ed72cf876c46}</Project>
       <Name>VCCorp.CrawlerCore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ext\Instagram_icon-icons.com_66804.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

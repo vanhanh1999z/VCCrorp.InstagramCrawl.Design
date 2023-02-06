@@ -58,5 +58,15 @@ namespace VCCorp_Crawler_si_demand_source_INS
             frmOneINS fr = new frmOneINS();
             fr.Show();
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

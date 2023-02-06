@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFindlSourceID_INS));
             this.groupLeft = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -107,7 +108,7 @@
             // 
             this.btnTestSrcIDINS.Location = new System.Drawing.Point(743, 18);
             this.btnTestSrcIDINS.Name = "btnTestSrcIDINS";
-            this.btnTestSrcIDINS.Size = new System.Drawing.Size(166, 26);
+            this.btnTestSrcIDINS.Size = new System.Drawing.Size(160, 26);
             this.btnTestSrcIDINS.TabIndex = 287;
             this.btnTestSrcIDINS.Text = "Test lấy sourceID INS";
             this.btnTestSrcIDINS.UseVisualStyleBackColor = true;
@@ -115,60 +116,63 @@
             // lbSaveSuccess
             // 
             this.lbSaveSuccess.AutoSize = true;
-            this.lbSaveSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSaveSuccess.Location = new System.Drawing.Point(574, 58);
+            this.lbSaveSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSaveSuccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(35)))), ((int)(((byte)(60)))));
+            this.lbSaveSuccess.Location = new System.Drawing.Point(547, 58);
             this.lbSaveSuccess.Name = "lbSaveSuccess";
-            this.lbSaveSuccess.Size = new System.Drawing.Size(14, 13);
+            this.lbSaveSuccess.Size = new System.Drawing.Size(13, 13);
             this.lbSaveSuccess.TabIndex = 302;
             this.lbSaveSuccess.Text = "0";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(431, 58);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(137, 13);
+            this.label4.Size = new System.Drawing.Size(116, 13);
             this.label4.TabIndex = 301;
             this.label4.Text = "Đã bóc và lưu vào DB:";
             // 
             // lbLinkIndexCurr
             // 
             this.lbLinkIndexCurr.AutoSize = true;
-            this.lbLinkIndexCurr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLinkIndexCurr.Location = new System.Drawing.Point(368, 58);
+            this.lbLinkIndexCurr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLinkIndexCurr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(35)))), ((int)(((byte)(60)))));
+            this.lbLinkIndexCurr.Location = new System.Drawing.Point(349, 58);
             this.lbLinkIndexCurr.Name = "lbLinkIndexCurr";
-            this.lbLinkIndexCurr.Size = new System.Drawing.Size(14, 13);
+            this.lbLinkIndexCurr.Size = new System.Drawing.Size(13, 13);
             this.lbLinkIndexCurr.TabIndex = 300;
             this.lbLinkIndexCurr.Text = "0";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(252, 58);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(116, 13);
+            this.label7.Size = new System.Drawing.Size(98, 13);
             this.label7.TabIndex = 299;
             this.label7.Text = "Đang bóc đến link:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(47, 58);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(134, 13);
+            this.label8.Size = new System.Drawing.Size(112, 13);
             this.label8.TabIndex = 298;
             this.label8.Text = "Tổng số link bóc post:";
             // 
             // lbTotalLink
             // 
             this.lbTotalLink.AutoSize = true;
-            this.lbTotalLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotalLink.Location = new System.Drawing.Point(183, 58);
+            this.lbTotalLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalLink.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(35)))), ((int)(((byte)(60)))));
+            this.lbTotalLink.Location = new System.Drawing.Point(160, 58);
             this.lbTotalLink.Name = "lbTotalLink";
-            this.lbTotalLink.Size = new System.Drawing.Size(14, 13);
+            this.lbTotalLink.Size = new System.Drawing.Size(13, 13);
             this.lbTotalLink.TabIndex = 297;
             this.lbTotalLink.Text = "0";
             // 
@@ -176,7 +180,7 @@
             // 
             this.btnsource.Location = new System.Drawing.Point(674, 51);
             this.btnsource.Name = "btnsource";
-            this.btnsource.Size = new System.Drawing.Size(117, 26);
+            this.btnsource.Size = new System.Drawing.Size(229, 26);
             this.btnsource.TabIndex = 303;
             this.btnsource.Text = "Getsourrce";
             this.btnsource.UseVisualStyleBackColor = true;
@@ -200,6 +204,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.btLoad);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmFindlSourceID_INS";
             this.Text = "frmFindlSourceID_INS";
             this.statusStrip1.ResumeLayout(false);

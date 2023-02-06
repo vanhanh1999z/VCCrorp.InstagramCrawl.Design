@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.Common;
+using VCCorp.CrawlerCore.Constant;
 using VCCorp.CrawlerCore.DTO;
 using VCCorp_Crawler_si_demand_source_INS.Config;
 
@@ -83,17 +84,13 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 _loading = 0;
 
                 browser = new ChromiumWebBrowser(txtAddress.Text);
-
                 this.Controls.Add(browser);
-
                 this.browser.Location = new System.Drawing.Point(1, 70);
                 this.browser.MinimumSize = new System.Drawing.Size(20, 20);
                 this.browser.Name = "webBrowser";
                 this.browser.Size = new System.Drawing.Size(956, 827);
                 this.browser.TabIndex = 4;
-
                 this.groupLeft.Controls.Add(this.browser);
-
                 browser.LoadingStateChanged += OnLoadingStateChanged;
                 //browser.AddressChanged += OnBrowserAddressChanged;
             }
@@ -108,14 +105,14 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             if (!args.IsLoading)
             {
-                _loading = 1;
+                _loading = SysConstants.Loading.AfterLoading;
             }
         }
         private void VarInit()
         {
             _flag = -1;
             _logFile = DateTime.Now.ToString("yyyy.MM.dd_HH.mm") + ".txt";
-            _loading = -1;
+            _loading = SysConstants.Loading.BeforeLoading;
             _indexCurr = -1;
         }
         /// <summary>
@@ -137,6 +134,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
             string source = task1.Result;
             return source;
         }
+
         /// <summary>
         /// Chuyển đổi ngày tháng
         /// </summary>
@@ -149,6 +147,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
             dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dateTime;
         }
+
         private async void CrawlerAndSend()
         {
             try
@@ -195,7 +194,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
                                     entrydatapost.idUser = data.node.owner.id;
                                     entrydatapost.imagePost = data.node.thumbnail_src;
                                     entrydatapost.creat_time = UnixTimeStampToDateTime(data.node.taken_at_timestamp);
-
                                     //data từ bảng si_demand_source lấy sang
                                     entrydatapost.si_demand_source_id = _listsidemandsource[_indexCurr].id;
                                     entrydatapost.platform = _listsidemandsource[_indexCurr].platform;
@@ -208,24 +206,25 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
                                     //Bắn Post lên kafa
                                     //Khai báo class bắn lên kafa
-                                    kafaPostINSDTO entdatakafapost = new kafaPostINSDTO();
-                                    entdatakafapost.Id = entrydatapost.post_id;
-                                    entdatakafapost.Message = entrydatapost.content;
-                                    entdatakafapost.ShortCode = data.node.shortcode;
-                                    entdatakafapost.Link = entrydatapost.link;
-                                    entdatakafapost.TotalComment = entrydatapost.total_comment;
-                                    entdatakafapost.TotalLike = entrydatapost.total_like;
-                                    entdatakafapost.TotalShare = 0;
-                                    entdatakafapost.TotalReaction = 0;
-                                    entdatakafapost.ImagePost = entrydatapost.imagePost;
-                                    entdatakafapost.Platform = entrydatapost.platform;
-                                    entdatakafapost.CreateTime = entrydatapost.creat_time;
-                                    entdatakafapost.TimeCrw = DateTime.Now;
-                                    entdatakafapost.TmpTime = data.node.taken_at_timestamp;
-                                    entdatakafapost.UserId = entrydatapost.idUser;
-                                    entdatakafapost.Username = "";
-                                    entdatakafapost.ImageUser = "";
-
+                                    kafaPostINSDTO entdatakafapost = new kafaPostINSDTO()
+                                    {
+                                        Id = entrydatapost.post_id,
+                                        Message = entrydatapost.content,
+                                        ShortCode = data.node.shortcode,
+                                        Link = entrydatapost.link,
+                                        TotalComment = entrydatapost.total_comment,
+                                        TotalLike = entrydatapost.total_like,
+                                        TotalShare = 0,
+                                        TotalReaction = 0,
+                                        ImagePost = entrydatapost.imagePost,
+                                        Platform = entrydatapost.platform,
+                                        CreateTime = entrydatapost.creat_time,
+                                        TimeCrw = DateTime.Now,
+                                        TmpTime = data.node.taken_at_timestamp,
+                                        UserId = entrydatapost.idUser,
+                                        Username = "",
+                                        ImageUser = ""
+                                    };
                                     await SaveKafraPost(entdatakafapost);
                                     //Insert post vào DB si_demand_source_post
                                     _bllpost.Insertsidemandsourcepost(entrydatapost);
@@ -432,7 +431,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
             if (_flag == 0)
             {
                 _flag = 1;
-                Thread th = new Thread(new ThreadStart(Crawler));
+                Thread th = new Thread(Crawler);
                 th.Start();
             }
 

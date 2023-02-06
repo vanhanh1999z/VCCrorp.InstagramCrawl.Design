@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loginINS));
             this.label3 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.btLoad = new System.Windows.Forms.Button();
@@ -55,7 +56,7 @@
             // 
             this.btLoad.Location = new System.Drawing.Point(780, 21);
             this.btLoad.Name = "btLoad";
-            this.btLoad.Size = new System.Drawing.Size(63, 26);
+            this.btLoad.Size = new System.Drawing.Size(125, 26);
             this.btLoad.TabIndex = 263;
             this.btLoad.Text = "Load";
             this.btLoad.UseVisualStyleBackColor = true;
@@ -78,6 +79,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.btLoad);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "loginINS";
             this.Text = "loginINS";
             this.ResumeLayout(false);

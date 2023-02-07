@@ -73,6 +73,9 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     NewsDbLocal = config.DbConnection.NewsDbLocal,
                     FBExce = config.DbConnection.FBExce,
                 };
+
+                IgRunTime.Config.InsQuery = new Query(config.InsQuery.TopSearchUrl, config.InsQuery.ProfileContentUrl);
+
                 Console.WriteLine(IgRunTime.Config);
                 Logging.Infomation("Khởi tạo cấu hình thành công");
             }

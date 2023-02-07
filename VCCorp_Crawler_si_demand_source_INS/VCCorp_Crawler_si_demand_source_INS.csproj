@@ -68,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\System.cs" />
+    <Compile Include="ext\Control\RButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="frmCrwSi_data_ExcelPost.cs">
       <SubType>Form</SubType>
     </Compile>

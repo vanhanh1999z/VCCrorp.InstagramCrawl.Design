@@ -10,10 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
-   
+
 
     public partial class frmMain : Form
     {
@@ -25,60 +26,17 @@ namespace VCCorp_Crawler_si_demand_source_INS
             InitBrowser();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            loginINS fr = new loginINS();
-            fr.Show();
-        }
-
-        private void btnPostINS_Click(object sender, EventArgs e)
-        {
-            frmSourcedemaind_INS fr = new frmSourcedemaind_INS();
-            fr.Show();
-        }
-
-        private void btnCmtINS_Click(object sender, EventArgs e)
-        {
-            frmPostdemandsource_INS fr = new frmPostdemandsource_INS();
-            fr.Show();
-        }
-
-        private void btnFindsourceID_Click(object sender, EventArgs e)
-        {
-            frmFindlSourceID_INS fr = new frmFindlSourceID_INS();
-            fr.Show();
-        }
-
-        private void btnCrwSidataExcel_Click(object sender, EventArgs e)
-        {
-            frmCrwSi_data_ExcelPost fr = new frmCrwSi_data_ExcelPost();
-            fr.Show();
-        }
-
-        private void btnSourcStatus0_Click(object sender, EventArgs e)
-        {
-            frmSourcesdemainNew fr = new frmSourcesdemainNew();
-            fr.Show();
-        }
-
-        private void btnINS_Click(object sender, EventArgs e)
-        {
-            frmOneINS fr = new frmOneINS();
-            fr.Show();
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private async void frmMain_LoadAsync(object sender, EventArgs e)
         {
-            grSiDemand.Enabled= false;
-            grSiDataExcel.Enabled= false;
-            await Task.Delay(5000);
-            grSiDemand.Enabled = true;
-            grSiDataExcel.Enabled = true;
+            this.SetEnableMainGroupBox(false);
+            await Task.Delay(3_000);
+            this.SetEnableMainGroupBox(true);
+        }
+
+        private void SetEnableMainGroupBox(bool enable)
+        {
+            grSiDemand.Enabled = enable;
+            grSiDataExcel.Enabled = enable;
         }
         public void InitBrowser()
         {
@@ -128,6 +86,42 @@ namespace VCCorp_Crawler_si_demand_source_INS
             {
                 _loading = 1;
             }
+        }
+
+        private void btPostINS_Click(object sender, EventArgs e)
+        {
+            frmSourcedemaind_INS fr = new frmSourcedemaind_INS();
+            fr.Show();
+        }
+
+        private void btCmtINS_Click(object sender, EventArgs e)
+        {
+            frmPostdemandsource_INS fr = new frmPostdemandsource_INS();
+            fr.Show();
+        }
+
+        private void btSourcStatus0_Click(object sender, EventArgs e)
+        {
+            frmSourcesdemainNew fr = new frmSourcesdemainNew();
+            fr.Show();
+        }
+
+        private void btFindsourceID_Click(object sender, EventArgs e)
+        {
+            frmFindlSourceID_INS fr = new frmFindlSourceID_INS();
+            fr.Show();
+        }
+
+        private void btCrwSidataExcel_Click(object sender, EventArgs e)
+        {
+            frmCrwSi_data_ExcelPost fr = new frmCrwSi_data_ExcelPost();
+            fr.Show();
+        }
+
+        private void btINS_Click(object sender, EventArgs e)
+        {
+            frmOneINS fr = new frmOneINS();
+            fr.Show();
         }
     }
 }

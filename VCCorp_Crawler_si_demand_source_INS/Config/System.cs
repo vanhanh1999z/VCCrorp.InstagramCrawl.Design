@@ -10,6 +10,17 @@ namespace VCCorp_Crawler_si_demand_source_INS.Config
     {
         public static IgConfig Config { get; set; }
     }
+    public class Query
+    {
+        public Query(string topSearchUrl, string profileContentUrl)
+        {
+            TopSearchUrl = topSearchUrl;
+            ProfileContentUrl = profileContentUrl;
+        }
+
+        public string TopSearchUrl { get; set; }
+        public string ProfileContentUrl { get; set; }
+    }
     public class DbConnection
     {
         public string FBExce { get; set; }
@@ -27,5 +38,7 @@ namespace VCCorp_Crawler_si_demand_source_INS.Config
     {
         public DbConnection DbConnection { get; set; }
         public Kafka Kafka { get; set; }
+        public Query InsQuery { get; set; }
+
     }
 }

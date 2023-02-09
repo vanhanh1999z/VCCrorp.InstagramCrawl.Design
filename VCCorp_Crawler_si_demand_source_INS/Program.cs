@@ -26,10 +26,10 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new frmMain());
             }
-            catch (Exception)
+            catch
             {
 
-                throw;
+
             }
         }
         public static async void Init()
@@ -60,28 +60,28 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             try
             {
-                IgRunTime.Config = new IgConfig();
-                IgRunTime.Config.Kafka = new Kafka()
+                IgRunTime.Config = new IgConfig()
                 {
-                    SERVER_LINK = config.Kafka.SERVER_LINK,
-                    _commentTableName = config.Kafka._commentTableName,
-                    _topicTableName = config.Kafka._topicTableName
+                    Platform = config.Platform,
+                    UserCrawler = config.UserCrawler,
+                    InstagramDomainUrlOnePose = config.InstagramDomainUrlOnePose,
+                    Kafka = new Kafka()
+                    {
+                        SERVER_LINK = config.Kafka.SERVER_LINK,
+                        _commentTableName = config.Kafka._commentTableName,
+                        _topicTableName = config.Kafka._topicTableName
+                    },
+                    DbConnection = new DbConnection()
+                    {
+                        NewsDbLocal = config.DbConnection.NewsDbLocal,
+                        FBExce = config.DbConnection.FBExce,
+                    },
+                    InsQuery = new Query(config.InsQuery.TopSearchUrl, config.InsQuery.ProfileContentUrl)
                 };
-
-                IgRunTime.Config.DbConnection = new DbConnection()
-                {
-                    NewsDbLocal = config.DbConnection.NewsDbLocal,
-                    FBExce = config.DbConnection.FBExce,
-                };
-
-                IgRunTime.Config.InsQuery = new Query(config.InsQuery.TopSearchUrl, config.InsQuery.ProfileContentUrl);
-
-                Console.WriteLine(IgRunTime.Config);
                 Logging.Infomation("Khởi tạo cấu hình thành công");
             }
             catch (Exception ex)
             {
-
                 Logging.Error(ex);
             }
         }

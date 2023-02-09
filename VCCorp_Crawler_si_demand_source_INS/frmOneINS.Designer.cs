@@ -114,6 +114,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmOneINS";
             this.Text = "frmINS";
+            this.Load += new System.EventHandler(this.frmOneINS_Load);
             this.groupLeft.ResumeLayout(false);
             this.groupLeft.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

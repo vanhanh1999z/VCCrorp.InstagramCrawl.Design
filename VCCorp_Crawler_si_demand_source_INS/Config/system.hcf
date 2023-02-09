@@ -12,5 +12,8 @@
   "InsQuery": {
     "TopSearchUrl": "https://www.instagram.com/web/search/topsearch/?query=",
     "ProfileContentUrl": "https://www.instagram.com/graphql/query/?query_hash=56a7068fea504063273cc2120ffd54f3&variables="
-  }
+  },
+  "UserCrawler": "hanhlv",
+  "InstagramDomainUrlOnePose": "https://wwww.instagram.com/p/",
+  "Platform": "instagram"
 }

@@ -58,94 +58,99 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 source = Regex.Replace(source, "</pre></body></html>", "", RegexOptions.IgnoreCase);
 
                 //phân tích ra json xong lưu vào db
-                var ObjRoot = JsonConvert.DeserializeObject<JsonSiDataExcel.Root>(source);
-                if (ObjRoot != null)
+                try
                 {
-                    if (ObjRoot.items != null)
+                    var ObjRoot = JsonConvert.DeserializeObject<JsonSiDataExcel.Root>(source);
+                    if (ObjRoot != null)
                     {
-                        foreach (var data in ObjRoot.items)
+                        if (ObjRoot.items != null)
                         {
-                            INSsidemandsourcepostDTO entrydatapost = new INSsidemandsourcepostDTO();
-                            entrydatapost.si_demand_source_id = _strId;
-                            entrydatapost.post_id = data.id;
-                            _strPostId = entrydatapost.post_id;
-                            entrydatapost.shortcode = data.code;
-                            entrydatapost.link = "https://www.instagram.com/p/" + entrydatapost.shortcode;
-                            entrydatapost.total_comment = data.comment_count;
-                            entrydatapost.total_like = data.like_count;
-                            try
+                            foreach (var data in ObjRoot.items)
                             {
-                                entrydatapost.content = data.caption.text;
-                            }
-                            catch
-                            { }
-                            try
-                            {
-                                entrydatapost.creat_time = UnixTimeStampToDateTime(data.device_timestamp);
-                            }
-                            catch { }
+                                INSsidemandsourcepostDTO entrydatapost = new INSsidemandsourcepostDTO();
+                                entrydatapost.si_demand_source_id = _strId;
+                                entrydatapost.post_id = data.id;
+                                _strPostId = entrydatapost.post_id;
+                                entrydatapost.shortcode = data.code;
+                                entrydatapost.link = "https://www.instagram.com/p/" + entrydatapost.shortcode;
+                                entrydatapost.total_comment = data.comment_count;
+                                entrydatapost.total_like = data.like_count;
+                                try
+                                {
+                                    entrydatapost.content = data.caption.text;
+                                }
+                                catch
+                                { }
+                                try
+                                {
+                                    entrydatapost.creat_time = UnixTimeStampToDateTime(data.device_timestamp);
+                                }
+                                catch { }
 
-                            entrydatapost.TimeCrw = DateTime.Now;
-                            try
-                            {
-                                entrydatapost.idUser = data.user.pk.ToString();
-                            }
-                            catch { }
-                            try
-                            {
-                                entrydatapost.nameUser = data.user.username;
-                            }
-                            catch { }
+                                entrydatapost.TimeCrw = DateTime.Now;
+                                try
+                                {
+                                    entrydatapost.idUser = data.user.pk.ToString();
+                                }
+                                catch { }
+                                try
+                                {
+                                    entrydatapost.nameUser = data.user.username;
+                                }
+                                catch { }
 
-                            try
-                            {
-                                entrydatapost.fullName = data.user.full_name;
+                                try
+                                {
+                                    entrydatapost.fullName = data.user.full_name;
+                                }
+                                catch { }
+
+                                try
+                                {
+                                    entrydatapost.profile_pic_url = data.user.profile_pic_url;
+                                }
+                                catch { }
+
+                                try
+                                {
+                                    entrydatapost.imagePost = data.carousel_media[0].image_versions2.candidates[0].url;
+                                }
+                                catch { }
+
+                                #region bắn lên kafa
+                                //Bắn Post lên kafa
+                                //Khai báo class bắn lên kafa
+                                kafaPostINSDTO entdatakafapost = new kafaPostINSDTO();
+                                entdatakafapost.Id = entrydatapost.post_id;
+                                entdatakafapost.Message = entrydatapost.content;
+                                entdatakafapost.ShortCode = entrydatapost.shortcode;
+                                entdatakafapost.Link = entrydatapost.link;
+                                entdatakafapost.TotalComment = entrydatapost.total_comment;
+                                entdatakafapost.TotalLike = entrydatapost.total_like;
+                                entdatakafapost.TotalShare = entrydatapost.total_share;
+                                entdatakafapost.TotalReaction = 0;
+                                entdatakafapost.ImagePost = entrydatapost.imagePost;
+                                entdatakafapost.Platform = entrydatapost.platform;
+                                entdatakafapost.CreateTime = entrydatapost.creat_time;
+                                entdatakafapost.TimeCrw = DateTime.Now;
+                                entdatakafapost.TmpTime = data.device_timestamp;
+                                entdatakafapost.UserId = entrydatapost.idUser;
+                                entdatakafapost.Username = entrydatapost.nameUser;
+                                entdatakafapost.ImageUser = entrydatapost.profile_pic_url;
+                                entdatakafapost.Platform = "instagram";
+
+                                await SaveKafraPost(entdatakafapost);
                             }
-                            catch { }
-
-                            try
-                            {
-                                entrydatapost.profile_pic_url = data.user.profile_pic_url;
-                            }
-                            catch { }
-
-                            try
-                            {
-                                entrydatapost.imagePost = data.carousel_media[0].image_versions2.candidates[0].url;
-                            }
-                            catch { }
-
-                            #region bắn lên kafa
-                            //Bắn Post lên kafa
-                            //Khai báo class bắn lên kafa
-                            kafaPostINSDTO entdatakafapost = new kafaPostINSDTO();
-                            entdatakafapost.Id = entrydatapost.post_id;
-                            entdatakafapost.Message = entrydatapost.content;
-                            entdatakafapost.ShortCode = entrydatapost.shortcode;
-                            entdatakafapost.Link = entrydatapost.link;
-                            entdatakafapost.TotalComment = entrydatapost.total_comment;
-                            entdatakafapost.TotalLike = entrydatapost.total_like;
-                            entdatakafapost.TotalShare = entrydatapost.total_share;
-                            entdatakafapost.TotalReaction = 0;
-                            entdatakafapost.ImagePost = entrydatapost.imagePost;
-                            entdatakafapost.Platform = entrydatapost.platform;
-                            entdatakafapost.CreateTime = entrydatapost.creat_time;
-                            entdatakafapost.TimeCrw = DateTime.Now;
-                            entdatakafapost.TmpTime = data.device_timestamp;
-                            entdatakafapost.UserId = entrydatapost.idUser;
-                            entdatakafapost.Username = entrydatapost.nameUser;
-                            entdatakafapost.ImageUser = entrydatapost.profile_pic_url;
-                            entdatakafapost.Platform = "instagram";
-
-                         await  SaveKafraPost(entdatakafapost);
                         }
-                    }
 
+                    }
+                    else
+                    {
+                        //lỗi source ko lấy đc data update trạng thái source = -1
+                    }
                 }
-                else
-                {
-                    //lỗi source ko lấy đc data update trạng thái source = -1
-                }
+                catch { }
+
                 try
                 {
                     //Bóc comment 
@@ -194,7 +199,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     }
                     #endregion
 
-                   
+
                 }
                 catch
                 { }
@@ -393,5 +398,9 @@ namespace VCCorp_Crawler_si_demand_source_INS
             _indexCurr = -1;
         }
 
+        private void frmOneINS_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

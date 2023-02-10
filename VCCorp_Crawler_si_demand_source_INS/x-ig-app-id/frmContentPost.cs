@@ -89,9 +89,9 @@ namespace VCCorp_Crawler_si_demand_source_INS
             await Task.Delay(3_000);
             string userNameUrl = Regex.Match(txtUrl.Text, "(?<=https://www.instagram.com/)(.*?)(?=/)").Value;
             Logging.Infomation("Bắt đầu crawl dữ liệu post...");
-            var result = await _contentBUS.CrawlInstagram(String.Empty, _browser, userNameUrl, lblSuccess, lblErr);
+            var tsk = await _contentBUS.CrawlInstagram(String.Empty, _browser, userNameUrl, lblSuccess, lblErr);
             await Task.Delay(3_000);
-            if (result == State.Erorr)
+            if (tsk == State.Erorr)
             {
                 tsStatus.Text = "Không lấy được dữ liệu, vui lòng thử lại sau";
                 return;

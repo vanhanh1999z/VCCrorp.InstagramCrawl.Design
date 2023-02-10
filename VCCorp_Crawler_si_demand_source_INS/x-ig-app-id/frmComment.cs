@@ -1,6 +1,5 @@
-﻿using CefSharp;
-using CefSharp.WinForms;
-using Crwal.Core.Base;
+﻿using CefSharp.WinForms;
+using CefSharp;
 using Crwal.Core.Log;
 using System;
 using System.Collections.Generic;
@@ -13,33 +12,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VCCorp.CrawlerCore.Base;
-using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.BUS.ig_app_id;
 using VCCorp.CrawlerCore.SysEnum;
-using VCCorp_Crawler_si_demand_source_INS.Config;
 
 namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
 {
-    public partial class frmSiDemanSource : Form
+    public partial class frmComment : Form
     {
-        public ChromiumWebBrowser _browser;
-        private ContentBUS _contentBUS = new ContentBUS();
-        private INSsidemandsourceBUS _bll = new INSsidemandsourceBUS(IgRunTime.Config.DbConnection.FBExce);
-        private int _idx = 1;
-        public frmSiDemanSource()
+        private ChromiumWebBrowser _browser;
+        public frmComment()
         {
             InitializeComponent();
             InitBrowser();
         }
 
-        private void frmSiDemanSource_Load(object sender, EventArgs e)
-        {
-        }
-
-        private async void btCheckCookie_Click(object sender, EventArgs e)
+        private async void btCommentCheck_ClickAsync(object sender, EventArgs e)
         {
             var cookie = await IgRunTime.GetGlobalCookie();
             MessageBox.Show($"cookie: {cookie} \n appId: {IgRunTime.AppId}");
+        }
+
+        private async void btCommentStart_Click(object sender, EventArgs e)
+        {
+            var commentBUS = new CommentBUS();
+            State state = await commentBUS.CrawlCommentAsync(_browser, string.Empty, lblTotal, lblCurrentPost, lblSuccess, lblErr, rtbResult);
+            if (state == State.Success)
+            {
+                stState.Text = "Đã hoàn tất!"; return;
+            }
+            stState.Text = "Đã có sự cố xảy ra, vui lòng kiểm ra lại!";
         }
         public void InitBrowser()
         {
@@ -57,6 +58,7 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                     settings.LogSeverity = LogSeverity.Disable;
                     CefSharp.Cef.Initialize(settings);
                 }
+                //Cef.Initialize(new CefSettings());
                 _browser = new ChromiumWebBrowser(IgRunTime.Config.DeafultLoadUrl);
                 this.Controls.Add(_browser);
                 this._browser.Location = new System.Drawing.Point(1, 70);
@@ -65,6 +67,8 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                 this._browser.Size = new System.Drawing.Size(956, 827);
                 this._browser.TabIndex = 4;
                 this.pnResult.Controls.Add(this._browser);
+                //_browser.LoadingStateChanged += OnLoadingStateChanged;
+                //_browser.AddressChanged += On_browserAddressChanged;
             }
             catch (Exception ex)
             {
@@ -72,28 +76,9 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
             }
         }
 
-        private async void btStartCrawl_ClickAsync(object sender, EventArgs e)
+        private void btShowDevTool_Click(object sender, EventArgs e)
         {
-            var links = _bll.GetDefaultSourcesidemandINS();
-
-            if (links != null && links.Count > 0)
-            {
-                foreach (var link in links)
-                {
-                    txtUrl.Text = link.link;
-                    string url = link.link.Replace("https://www.instagram.com", "");
-                    url = url.Replace("/", "");
-                    var result = await _contentBUS.CrawlInstagram(string.Empty, _browser, url, lblSuccess, lblErr);
-                    if (result == State.Erorr)
-                    {
-                        Logging.Error("Thêm bài viết: " + url + " thất bại!");
-                    }
-                    else
-                    {
-                        Logging.Infomation("Thêm bài viết: " + url + " thành công!");
-                    }
-                }
-            }
+            _browser.ShowDevTools();
         }
     }
 }

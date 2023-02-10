@@ -179,6 +179,12 @@ namespace VCCorp_Crawler_si_demand_source_INS
             var frm = new frmSiDemanSource();
             frm.Show();
         }
+
+        private void btComment_Click(object sender, EventArgs e)
+        {
+            frmComment frm = new frmComment();
+            frm.Show();
+        }
     }
 
 }

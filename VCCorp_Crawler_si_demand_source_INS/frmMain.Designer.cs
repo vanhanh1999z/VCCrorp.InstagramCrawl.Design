@@ -303,7 +303,7 @@
             this.btComment.Text = "Bóc comment";
             this.btComment.TextColor = System.Drawing.Color.White;
             this.btComment.UseVisualStyleBackColor = false;
-            this.btComment.Click += new System.EventHandler(this.btPostUser_Click);
+            this.btComment.Click += new System.EventHandler(this.btComment_Click);
             // 
             // btPostUser
             // 

@@ -33,6 +33,10 @@
             this.btStartCrawl = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.pnResult = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblSuccess = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblErr = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btCheckCookie
@@ -83,16 +87,58 @@
             // 
             // pnResult
             // 
-            this.pnResult.Location = new System.Drawing.Point(22, 72);
+            this.pnResult.Location = new System.Drawing.Point(22, 84);
             this.pnResult.Name = "pnResult";
-            this.pnResult.Size = new System.Drawing.Size(881, 377);
+            this.pnResult.Size = new System.Drawing.Size(881, 365);
             this.pnResult.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 58);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(130, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Số bài viết lấy thành công";
+            // 
+            // lblSuccess
+            // 
+            this.lblSuccess.AutoSize = true;
+            this.lblSuccess.ForeColor = System.Drawing.Color.Red;
+            this.lblSuccess.Location = new System.Drawing.Point(157, 58);
+            this.lblSuccess.Name = "lblSuccess";
+            this.lblSuccess.Size = new System.Drawing.Size(13, 13);
+            this.lblSuccess.TabIndex = 4;
+            this.lblSuccess.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(188, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(111, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Số bài viết lấy thất bại";
+            // 
+            // lblErr
+            // 
+            this.lblErr.AutoSize = true;
+            this.lblErr.ForeColor = System.Drawing.Color.Red;
+            this.lblErr.Location = new System.Drawing.Point(305, 58);
+            this.lblErr.Name = "lblErr";
+            this.lblErr.Size = new System.Drawing.Size(13, 13);
+            this.lblErr.TabIndex = 4;
+            this.lblErr.Text = "0";
             // 
             // frmSiDemanSource
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 461);
+            this.Controls.Add(this.lblErr);
+            this.Controls.Add(this.lblSuccess);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pnResult);
             this.Controls.Add(this.txtUrl);
             this.Controls.Add(this.btStartCrawl);
@@ -112,5 +158,9 @@
         private ext.Control.RButton btStartCrawl;
         private System.Windows.Forms.TextBox txtUrl;
         private System.Windows.Forms.Panel pnResult;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblSuccess;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblErr;
     }
 }

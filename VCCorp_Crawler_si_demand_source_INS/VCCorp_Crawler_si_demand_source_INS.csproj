@@ -72,6 +72,12 @@
     <Compile Include="ext\Control\RButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="x-ig-app-id\frmComment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="x-ig-app-id\frmComment.Designer.cs">
+      <DependentUpon>frmComment.cs</DependentUpon>
+    </Compile>
     <Compile Include="x-ig-app-id\frmContentPost.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     <Compile Include="x-ig-app-id\frmSiDemanSource.Designer.cs">
       <DependentUpon>frmSiDemanSource.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="x-ig-app-id\frmComment.resx">
+      <DependentUpon>frmComment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="x-ig-app-id\frmContentPost.resx">
       <DependentUpon>frmContentPost.cs</DependentUpon>
     </EmbeddedResource>

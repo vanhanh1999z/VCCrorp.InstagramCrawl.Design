@@ -14,6 +14,8 @@ using System.Windows.Forms;
 using System.Threading;
 using Crwal.Core.Base;
 using VCCorp_Crawler_si_demand_source_INS.Config;
+using VCCorp_Crawler_si_demand_source_INS.x_ig_app_id;
+using VCCorp.CrawlerCore.Base;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -41,7 +43,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
             this.SetEnableMainGroupBox(false);
             await Task.Delay(4_000);
             IgRunTime.AppId = await GetAppIdIns();
-            //MessageBox.Show("Lấy appId thành công: " + IgRunTime.AppId);
             this.SetEnableMainGroupBox(true);
         }
 
@@ -171,6 +172,12 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             var frmContentUser = new frmContentPost();
             frmContentUser.Show();
+        }
+
+        private void btSiDemanSource_Click(object sender, EventArgs e)
+        {
+            var frm = new frmSiDemanSource();
+            frm.Show();
         }
     }
 

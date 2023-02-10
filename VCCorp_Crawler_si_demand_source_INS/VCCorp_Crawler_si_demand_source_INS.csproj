@@ -56,6 +56,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,14 +69,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\CookieCollector.cs" />
-    <Compile Include="Config\System.cs" />
     <Compile Include="ext\Control\RButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="frmContentPost.cs">
+    <Compile Include="x-ig-app-id\frmContentPost.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmContentPost.Designer.cs">
+    <Compile Include="x-ig-app-id\frmContentPost.Designer.cs">
       <DependentUpon>frmContentPost.cs</DependentUpon>
     </Compile>
     <Compile Include="frmCrwSi_data_ExcelPost.cs">
@@ -128,7 +128,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmContentPost.resx">
+    <Compile Include="x-ig-app-id\frmSiDemanSource.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="x-ig-app-id\frmSiDemanSource.Designer.cs">
+      <DependentUpon>frmSiDemanSource.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="x-ig-app-id\frmContentPost.resx">
       <DependentUpon>frmContentPost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCrwSi_data_ExcelPost.resx">
@@ -165,6 +171,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="x-ig-app-id\frmSiDemanSource.resx">
+      <DependentUpon>frmSiDemanSource.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Config\system.hcf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

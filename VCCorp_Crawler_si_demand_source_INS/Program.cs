@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Crwal.Core.Log;
 using Newtonsoft.Json;
+using VCCorp.CrawlerCore.Base;
 using VCCorp_Crawler_si_demand_source_INS.Config;
 
 namespace VCCorp_Crawler_si_demand_source_INS
@@ -18,7 +20,8 @@ namespace VCCorp_Crawler_si_demand_source_INS
         [STAThread]
         static void Main()
         {
-            Logging.Init();
+            string projectName = Assembly.GetExecutingAssembly().GetName().Name;
+            Logging.Init(projectName);
             try
             {
                 Program.Init();
@@ -65,6 +68,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     Platform = config.Platform,
                     UserCrawler = config.UserCrawler,
                     InstagramDomainUrlOnePose = config.InstagramDomainUrlOnePose,
+                    DeafultLoadUrl = config.DeafultLoadUrl,
                     Kafka = new Kafka()
                     {
                         SERVER_LINK = config.Kafka.SERVER_LINK,

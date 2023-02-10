@@ -14,6 +14,7 @@
     "ProfileContentUrl": "https://www.instagram.com/graphql/query/?query_hash=56a7068fea504063273cc2120ffd54f3&variables="
   },
   "UserCrawler": "hanhlv",
-  "InstagramDomainUrlOnePose": "https://wwww.instagram.com/p/",
-  "Platform": "instagram"
+  "InstagramDomainUrlOnePose": "https://www.instagram.com/p/",
+  "Platform": "instagram",
+  "DeafultLoadUrl": "https://www.instagram.com/_hl.gaukl/"
 }

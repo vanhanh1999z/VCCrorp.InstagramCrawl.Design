@@ -16,7 +16,7 @@ namespace VCCorp_Crawler_si_demand_source_INS.Config
         {
             var cookieManager = Cef.GetGlobalCookieManager();
             var visitor = new CookieCollector();
-            cookieManager.VisitUrlCookies("https://www.instagram.com/", true, (ICookieVisitor)visitor);
+            cookieManager.VisitUrlCookies("https://www.instagram.com", true, (ICookieVisitor)visitor);
             var cookies = await visitor.Task;
             var cookieHeader = CookieCollector.GetCookieHeader(cookies);
             return cookieHeader;
@@ -53,5 +53,6 @@ namespace VCCorp_Crawler_si_demand_source_INS.Config
         public string Platform { get; set; }
         public string UserCrawler { get; set; }
         public string InstagramDomainUrlOnePose { get; set; }
+        public string DeafultLoadUrl { get; set; }
     }
 }

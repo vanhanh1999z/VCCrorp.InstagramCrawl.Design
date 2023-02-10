@@ -38,6 +38,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.stsTimer = new System.Windows.Forms.StatusStrip();
             this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblSuccess = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblErr = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.stsTimer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,8 +55,8 @@
             // 
             // btCheckCookie
             // 
-            this.btCheckCookie.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.btCheckCookie.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
+            this.btCheckCookie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(180)))), ((int)(((byte)(216)))));
+            this.btCheckCookie.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(180)))), ((int)(((byte)(216)))));
             this.btCheckCookie.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.btCheckCookie.BorderRadius = 3;
             this.btCheckCookie.BorderSize = 0;
@@ -70,8 +74,8 @@
             // 
             // btStart
             // 
-            this.btStart.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.btStart.BackgroundColor = System.Drawing.Color.MediumSlateBlue;
+            this.btStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(119)))), ((int)(((byte)(182)))));
+            this.btStart.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(119)))), ((int)(((byte)(182)))));
             this.btStart.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.btStart.BorderRadius = 3;
             this.btStart.BorderSize = 0;
@@ -138,12 +142,54 @@
             this.tsStatus.Size = new System.Drawing.Size(62, 17);
             this.tsStatus.Text = "Trạng thái:";
             // 
+            // lblSuccess
+            // 
+            this.lblSuccess.AutoSize = true;
+            this.lblSuccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSuccess.Location = new System.Drawing.Point(272, 50);
+            this.lblSuccess.Name = "lblSuccess";
+            this.lblSuccess.Size = new System.Drawing.Size(13, 13);
+            this.lblSuccess.TabIndex = 6;
+            this.lblSuccess.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(136, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(130, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Số lượng bài viết lấy được";
+            // 
+            // lblErr
+            // 
+            this.lblErr.AutoSize = true;
+            this.lblErr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblErr.Location = new System.Drawing.Point(379, 50);
+            this.lblErr.Name = "lblErr";
+            this.lblErr.Size = new System.Drawing.Size(13, 13);
+            this.lblErr.TabIndex = 6;
+            this.lblErr.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(303, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(70, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Số bài viết lỗi";
+            // 
             // frmContentPost
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 584);
             this.Controls.Add(this.stsTimer);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblErr);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblSuccess);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblCountFile);
             this.Controls.Add(this.pnView);
@@ -154,7 +200,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmContentPost";
             this.Text = "Bóc content User";
-            this.Load += new System.EventHandler(this.frmContentPost_Load);
             this.stsTimer.ResumeLayout(false);
             this.stsTimer.PerformLayout();
             this.ResumeLayout(false);
@@ -173,5 +218,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.StatusStrip stsTimer;
         private System.Windows.Forms.ToolStripStatusLabel tsStatus;
+        private System.Windows.Forms.Label lblSuccess;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblErr;
+        private System.Windows.Forms.Label label4;
     }
 }

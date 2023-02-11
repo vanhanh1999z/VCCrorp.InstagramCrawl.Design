@@ -25,13 +25,11 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
             InitializeComponent();
             InitBrowser();
         }
-
         private async void btCommentCheck_ClickAsync(object sender, EventArgs e)
         {
             var cookie = await IgRunTime.GetGlobalCookie();
             MessageBox.Show($"cookie: {cookie} \n appId: {IgRunTime.AppId}");
         }
-
         private async void btCommentStart_Click(object sender, EventArgs e)
         {
             var commentBUS = new CommentBUS();
@@ -75,7 +73,6 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                 Logging.Error(ex);
             }
         }
-
         private void btShowDevTool_Click(object sender, EventArgs e)
         {
             _browser.ShowDevTools();

@@ -44,10 +44,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.stState = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pnResult = new System.Windows.Forms.Panel();
+            this.btShowDevTool = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btCommentStart = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btCommentCheck = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
-            this.btShowDevTool = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
+            this.pnResult = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -207,12 +207,24 @@
             this.stState.Size = new System.Drawing.Size(62, 17);
             this.stState.Text = "Trạng thái:";
             // 
-            // pnResult
+            // btShowDevTool
             // 
-            this.pnResult.Location = new System.Drawing.Point(225, 21);
-            this.pnResult.Name = "pnResult";
-            this.pnResult.Size = new System.Drawing.Size(819, 334);
-            this.pnResult.TabIndex = 3;
+            this.btShowDevTool.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(175)))), ((int)(((byte)(185)))));
+            this.btShowDevTool.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(175)))), ((int)(((byte)(185)))));
+            this.btShowDevTool.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.btShowDevTool.BorderRadius = 3;
+            this.btShowDevTool.BorderSize = 0;
+            this.btShowDevTool.FlatAppearance.BorderSize = 0;
+            this.btShowDevTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btShowDevTool.ForeColor = System.Drawing.Color.White;
+            this.btShowDevTool.Location = new System.Drawing.Point(25, 107);
+            this.btShowDevTool.Name = "btShowDevTool";
+            this.btShowDevTool.Size = new System.Drawing.Size(153, 29);
+            this.btShowDevTool.TabIndex = 0;
+            this.btShowDevTool.Text = "Dev Tool";
+            this.btShowDevTool.TextColor = System.Drawing.Color.White;
+            this.btShowDevTool.UseVisualStyleBackColor = false;
+            this.btShowDevTool.Click += new System.EventHandler(this.btShowDevTool_Click);
             // 
             // btCommentStart
             // 
@@ -252,24 +264,12 @@
             this.btCommentCheck.UseVisualStyleBackColor = false;
             this.btCommentCheck.Click += new System.EventHandler(this.btCommentCheck_ClickAsync);
             // 
-            // btShowDevTool
+            // pnResult
             // 
-            this.btShowDevTool.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(175)))), ((int)(((byte)(185)))));
-            this.btShowDevTool.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(175)))), ((int)(((byte)(185)))));
-            this.btShowDevTool.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.btShowDevTool.BorderRadius = 3;
-            this.btShowDevTool.BorderSize = 0;
-            this.btShowDevTool.FlatAppearance.BorderSize = 0;
-            this.btShowDevTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btShowDevTool.ForeColor = System.Drawing.Color.White;
-            this.btShowDevTool.Location = new System.Drawing.Point(25, 107);
-            this.btShowDevTool.Name = "btShowDevTool";
-            this.btShowDevTool.Size = new System.Drawing.Size(153, 29);
-            this.btShowDevTool.TabIndex = 0;
-            this.btShowDevTool.Text = "Dev Tool";
-            this.btShowDevTool.TextColor = System.Drawing.Color.White;
-            this.btShowDevTool.UseVisualStyleBackColor = false;
-            this.btShowDevTool.Click += new System.EventHandler(this.btShowDevTool_Click);
+            this.pnResult.Location = new System.Drawing.Point(225, 21);
+            this.pnResult.Name = "pnResult";
+            this.pnResult.Size = new System.Drawing.Size(819, 334);
+            this.pnResult.TabIndex = 3;
             // 
             // frmComment
             // 
@@ -282,6 +282,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmComment";
             this.Text = "Bóc comment trong si_demand_post";
+            this.Load += new System.EventHandler(this.frmComment_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();

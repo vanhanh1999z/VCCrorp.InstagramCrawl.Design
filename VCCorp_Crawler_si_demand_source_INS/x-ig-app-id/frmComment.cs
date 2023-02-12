@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using VCCorp.CrawlerCore.Base;
 using VCCorp.CrawlerCore.BUS.ig_app_id;
 using VCCorp.CrawlerCore.SysEnum;
+using CefSharp.DevTools;
 
 namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
 {
@@ -24,6 +25,8 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
         {
             InitializeComponent();
             InitBrowser();
+            
+
         }
         private async void btCommentCheck_ClickAsync(object sender, EventArgs e)
         {
@@ -32,6 +35,8 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
         }
         private async void btCommentStart_Click(object sender, EventArgs e)
         {
+            var reqCtx = new RequestContext();
+
             var commentBUS = new CommentBUS();
             State state = await commentBUS.CrawlCommentAsync(_browser, string.Empty, lblTotal, lblCurrentPost, lblSuccess, lblErr, rtbResult);
             if (state == State.Success)
@@ -44,6 +49,7 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
         {
             try
             {
+
                 if (!CefSharp.Cef.IsInitialized)
                 {
                     string pathCache = IgRunTime.CachePath;
@@ -65,8 +71,15 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                 this._browser.Size = new System.Drawing.Size(956, 827);
                 this._browser.TabIndex = 4;
                 this.pnResult.Controls.Add(this._browser);
-                //_browser.LoadingStateChanged += OnLoadingStateChanged;
+                _browser.LoadingStateChanged += (sender, args) =>
+                {
+                    VCCorp.CrawlerCore.Base.Request req = new VCCorp.CrawlerCore.Base.Request();
+                    var script = req.LoadScriptJs().Result;
+                    _browser.ExecuteScriptAsync(script);
+                };
                 //_browser.AddressChanged += On_browserAddressChanged;
+                
+
             }
             catch (Exception ex)
             {
@@ -76,6 +89,11 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
         private void btShowDevTool_Click(object sender, EventArgs e)
         {
             _browser.ShowDevTools();
+        }
+
+        private void frmComment_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

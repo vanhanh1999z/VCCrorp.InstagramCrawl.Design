@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Crwal.Core.Log;
+﻿using Crwal.Core.Log;
 using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 using VCCorp.CrawlerCore.Base;
-using VCCorp_Crawler_si_demand_source_INS.Config;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -31,8 +27,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
             }
             catch
             {
-
-
             }
         }
         public static async void Init()

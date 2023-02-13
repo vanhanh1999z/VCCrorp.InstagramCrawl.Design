@@ -42,6 +42,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblErr = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btShowDevTool = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
+            this.rtbResult = new System.Windows.Forms.RichTextBox();
             this.stsTimer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +52,7 @@
             this.txtUrl.Location = new System.Drawing.Point(33, 12);
             this.txtUrl.Multiline = true;
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(500, 31);
+            this.txtUrl.Size = new System.Drawing.Size(578, 31);
             this.txtUrl.TabIndex = 0;
             // 
             // btCheckCookie
@@ -63,7 +65,7 @@
             this.btCheckCookie.FlatAppearance.BorderSize = 0;
             this.btCheckCookie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btCheckCookie.ForeColor = System.Drawing.Color.White;
-            this.btCheckCookie.Location = new System.Drawing.Point(549, 12);
+            this.btCheckCookie.Location = new System.Drawing.Point(734, 12);
             this.btCheckCookie.Name = "btCheckCookie";
             this.btCheckCookie.Size = new System.Drawing.Size(109, 31);
             this.btCheckCookie.TabIndex = 2;
@@ -82,9 +84,9 @@
             this.btStart.FlatAppearance.BorderSize = 0;
             this.btStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btStart.ForeColor = System.Drawing.Color.White;
-            this.btStart.Location = new System.Drawing.Point(669, 12);
+            this.btStart.Location = new System.Drawing.Point(852, 12);
             this.btStart.Name = "btStart";
-            this.btStart.Size = new System.Drawing.Size(109, 31);
+            this.btStart.Size = new System.Drawing.Size(129, 31);
             this.btStart.TabIndex = 2;
             this.btStart.Text = "Bắt đầu crwal";
             this.btStart.TextColor = System.Drawing.Color.White;
@@ -104,7 +106,7 @@
             // 
             this.pnView.Location = new System.Drawing.Point(12, 77);
             this.pnView.Name = "pnView";
-            this.pnView.Size = new System.Drawing.Size(781, 479);
+            this.pnView.Size = new System.Drawing.Size(969, 298);
             this.pnView.TabIndex = 5;
             // 
             // lblCountFile
@@ -130,9 +132,9 @@
             // 
             this.stsTimer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsStatus});
-            this.stsTimer.Location = new System.Drawing.Point(0, 562);
+            this.stsTimer.Location = new System.Drawing.Point(0, 580);
             this.stsTimer.Name = "stsTimer";
-            this.stsTimer.Size = new System.Drawing.Size(800, 22);
+            this.stsTimer.Size = new System.Drawing.Size(993, 22);
             this.stsTimer.TabIndex = 8;
             this.stsTimer.Text = "statusStrip1";
             // 
@@ -180,11 +182,40 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Số bài viết lỗi";
             // 
+            // btShowDevTool
+            // 
+            this.btShowDevTool.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(199)))));
+            this.btShowDevTool.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(199)))));
+            this.btShowDevTool.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.btShowDevTool.BorderRadius = 3;
+            this.btShowDevTool.BorderSize = 0;
+            this.btShowDevTool.FlatAppearance.BorderSize = 0;
+            this.btShowDevTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btShowDevTool.ForeColor = System.Drawing.Color.White;
+            this.btShowDevTool.Location = new System.Drawing.Point(617, 12);
+            this.btShowDevTool.Name = "btShowDevTool";
+            this.btShowDevTool.Size = new System.Drawing.Size(109, 31);
+            this.btShowDevTool.TabIndex = 2;
+            this.btShowDevTool.Text = "Show DevTool";
+            this.btShowDevTool.TextColor = System.Drawing.Color.White;
+            this.btShowDevTool.UseVisualStyleBackColor = false;
+            this.btShowDevTool.Click += new System.EventHandler(this.btShowDevTool_Click);
+            // 
+            // rtbResult
+            // 
+            this.rtbResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbResult.Location = new System.Drawing.Point(12, 382);
+            this.rtbResult.Name = "rtbResult";
+            this.rtbResult.Size = new System.Drawing.Size(969, 190);
+            this.rtbResult.TabIndex = 9;
+            this.rtbResult.Text = "";
+            // 
             // frmContentPost
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 584);
+            this.ClientSize = new System.Drawing.Size(993, 602);
+            this.Controls.Add(this.rtbResult);
             this.Controls.Add(this.stsTimer);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblErr);
@@ -195,11 +226,13 @@
             this.Controls.Add(this.pnView);
             this.Controls.Add(this.lblUrl);
             this.Controls.Add(this.btStart);
+            this.Controls.Add(this.btShowDevTool);
             this.Controls.Add(this.btCheckCookie);
             this.Controls.Add(this.txtUrl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmContentPost";
             this.Text = "Bóc content User";
+            this.Load += new System.EventHandler(this.frmContentPost_Load);
             this.stsTimer.ResumeLayout(false);
             this.stsTimer.PerformLayout();
             this.ResumeLayout(false);
@@ -222,5 +255,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblErr;
         private System.Windows.Forms.Label label4;
+        private ext.Control.RButton btShowDevTool;
+        private System.Windows.Forms.RichTextBox rtbResult;
     }
 }

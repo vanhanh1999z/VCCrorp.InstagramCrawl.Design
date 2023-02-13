@@ -3,12 +3,7 @@ using CefSharp.WinForms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +13,6 @@ using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.Common;
 using VCCorp.CrawlerCore.Constant;
 using VCCorp.CrawlerCore.DTO;
-using VCCorp_Crawler_si_demand_source_INS.Config;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {

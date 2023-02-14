@@ -350,7 +350,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     CefSharp.WinForms.CefSettings settings = new CefSharp.WinForms.CefSettings();
                     settings.CachePath = pathCache;
                     settings.LogSeverity = LogSeverity.Disable;
-
                     CefSharp.Cef.Initialize(settings);
                 }
 

@@ -1,4 +1,6 @@
-﻿using Crwal.Core.Log;
+﻿using Crwal.Core.Base;
+using Crwal.Core.Log;
+using Crwal.Core.Sql;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -57,6 +59,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             try
             {
+
                 IgRunTime.Config = new IgConfig()
                 {
                     Platform = config.Platform,
@@ -71,11 +74,17 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     },
                     DbConnection = new DbConnection()
                     {
-                        NewsDbLocal = config.DbConnection.NewsDbLocal,
-                        FBExce = config.DbConnection.FBExce,
                     },
+                    CloudDbConnection = new DbConnection()
+                    {
+                    },
+                    Proxy = config.Proxy,
                     InsQuery = new Query(config.InsQuery.TopSearchUrl, config.InsQuery.ProfileContentUrl)
                 };
+                var localConnection = new ConnectionString(config.DbConnection.ServerName, config.DbConnection.User, config.DbConnection.Password);
+                var cloudConnection = new ConnectionString(config.CloudDbConnection.ServerName, config.CloudDbConnection.User, config.CloudDbConnection.Password);
+                IgRunTime.Config.DbConnection.FBExce = localConnection.BuildConnectionString();
+                IgRunTime.Config.CloudDbConnection.FBExce = cloudConnection.BuildConnectionString();
                 Logging.Infomation("Khởi tạo cấu hình thành công");
             }
             catch (Exception ex)

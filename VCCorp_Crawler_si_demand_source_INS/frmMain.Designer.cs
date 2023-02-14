@@ -41,8 +41,9 @@
             this.btPostINS = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.gbCookie = new System.Windows.Forms.GroupBox();
             this.btSiDemanSource = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
+            this.btnHashtag = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btPostAndComment = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
-            this.rButton1 = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
+            this.btnSiDemandSourcePost = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btComment = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btPostUser = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.grSiDataExcel.SuspendLayout();
@@ -218,8 +219,9 @@
             // gbCookie
             // 
             this.gbCookie.Controls.Add(this.btSiDemanSource);
+            this.gbCookie.Controls.Add(this.btnHashtag);
             this.gbCookie.Controls.Add(this.btPostAndComment);
-            this.gbCookie.Controls.Add(this.rButton1);
+            this.gbCookie.Controls.Add(this.btnSiDemandSourcePost);
             this.gbCookie.Controls.Add(this.btComment);
             this.gbCookie.Controls.Add(this.btPostUser);
             this.gbCookie.Location = new System.Drawing.Point(12, 143);
@@ -248,6 +250,25 @@
             this.btSiDemanSource.UseVisualStyleBackColor = false;
             this.btSiDemanSource.Click += new System.EventHandler(this.btSiDemanSource_Click);
             // 
+            // btnHashtag
+            // 
+            this.btnHashtag.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(129)))), ((int)(((byte)(137)))));
+            this.btnHashtag.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(129)))), ((int)(((byte)(137)))));
+            this.btnHashtag.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.btnHashtag.BorderRadius = 7;
+            this.btnHashtag.BorderSize = 0;
+            this.btnHashtag.FlatAppearance.BorderSize = 0;
+            this.btnHashtag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHashtag.ForeColor = System.Drawing.Color.White;
+            this.btnHashtag.Location = new System.Drawing.Point(880, 19);
+            this.btnHashtag.Name = "btnHashtag";
+            this.btnHashtag.Size = new System.Drawing.Size(119, 50);
+            this.btnHashtag.TabIndex = 0;
+            this.btnHashtag.Text = "Bóc theo hashtag";
+            this.btnHashtag.TextColor = System.Drawing.Color.White;
+            this.btnHashtag.UseVisualStyleBackColor = false;
+            this.btnHashtag.Click += new System.EventHandler(this.btnHashtag_Click);
+            // 
             // btPostAndComment
             // 
             this.btPostAndComment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(129)))), ((int)(((byte)(137)))));
@@ -267,24 +288,24 @@
             this.btPostAndComment.UseVisualStyleBackColor = false;
             this.btPostAndComment.Click += new System.EventHandler(this.btCrwSidataExcel_Click);
             // 
-            // rButton1
+            // btnSiDemandSourcePost
             // 
-            this.rButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
-            this.rButton1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
-            this.rButton1.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rButton1.BorderRadius = 7;
-            this.rButton1.BorderSize = 0;
-            this.rButton1.FlatAppearance.BorderSize = 0;
-            this.rButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rButton1.ForeColor = System.Drawing.Color.White;
-            this.rButton1.Location = new System.Drawing.Point(490, 19);
-            this.rButton1.Name = "rButton1";
-            this.rButton1.Size = new System.Drawing.Size(213, 50);
-            this.rButton1.TabIndex = 0;
-            this.rButton1.Text = "Bóc comment của một bài viết bất kỳ";
-            this.rButton1.TextColor = System.Drawing.Color.White;
-            this.rButton1.UseVisualStyleBackColor = false;
-            this.rButton1.Click += new System.EventHandler(this.btFindsourceID_Click);
+            this.btnSiDemandSourcePost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
+            this.btnSiDemandSourcePost.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(169)))), ((int)(((byte)(140)))));
+            this.btnSiDemandSourcePost.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.btnSiDemandSourcePost.BorderRadius = 7;
+            this.btnSiDemandSourcePost.BorderSize = 0;
+            this.btnSiDemandSourcePost.FlatAppearance.BorderSize = 0;
+            this.btnSiDemandSourcePost.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSiDemandSourcePost.ForeColor = System.Drawing.Color.White;
+            this.btnSiDemandSourcePost.Location = new System.Drawing.Point(490, 19);
+            this.btnSiDemandSourcePost.Name = "btnSiDemandSourcePost";
+            this.btnSiDemandSourcePost.Size = new System.Drawing.Size(213, 50);
+            this.btnSiDemandSourcePost.TabIndex = 0;
+            this.btnSiDemandSourcePost.Text = "Bóc si_demand_source_post";
+            this.btnSiDemandSourcePost.TextColor = System.Drawing.Color.White;
+            this.btnSiDemandSourcePost.UseVisualStyleBackColor = false;
+            this.btnSiDemandSourcePost.Click += new System.EventHandler(this.btnSiDemandSourcePost_Click);
             // 
             // btComment
             // 
@@ -365,8 +386,9 @@
         private System.Windows.Forms.GroupBox gbCookie;
         private ext.Control.RButton btSiDemanSource;
         private ext.Control.RButton btPostAndComment;
-        private ext.Control.RButton rButton1;
+        private ext.Control.RButton btnSiDemandSourcePost;
         private ext.Control.RButton btComment;
+        private ext.Control.RButton btnHashtag;
     }
 }
 

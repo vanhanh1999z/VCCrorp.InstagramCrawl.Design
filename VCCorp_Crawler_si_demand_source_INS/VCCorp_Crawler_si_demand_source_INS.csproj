@@ -134,6 +134,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="x-ig-app-id\frmHashtag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="x-ig-app-id\frmHashtag.Designer.cs">
+      <DependentUpon>frmHashtag.cs</DependentUpon>
+    </Compile>
     <Compile Include="x-ig-app-id\frmSiDemanSource.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="x-ig-app-id\frmHashtag.resx">
+      <DependentUpon>frmHashtag.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="x-ig-app-id\frmSiDemanSource.resx">
       <DependentUpon>frmSiDemanSource.cs</DependentUpon>
     </EmbeddedResource>

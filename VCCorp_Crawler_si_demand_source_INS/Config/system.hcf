@@ -1,13 +1,19 @@
 ﻿{
   "DbConnection": {
-    "FBExce": "Data Source=localhost,3306;Initial Catalog = social_index_v2; User ID = root; Password = Abcde12345-",
-    "NewsDbLocal": "Data Source=localhost,3306;Initial Catalog = social_index_v2; User ID = root; Password = Abcde12345-"
+    "ServerName": "localhost,3306",
+    "User": "root",
+    "Password": "IjsholfmbIL6kqGZTjMSXnCyOUWJso5COLS4K2s2tOpzhvvSHOBf0LQqLoLhFeyQaaQb+DSXJuKjp5NmyzOYVGtNWnjgkYVwkIjabIt4oczA63ZOZMgPNScyZSej/Vel"
+  },
+  "CloudDbConnection": {
+    "ServerName": "192.168.23.22,3306",
+    "User": "hanhlv",
+    "Password": "ThhZWCHaEP4jZmrYZpW9ho2OQ9TQ9MnpKWLY8yHyfAwEsUlyItLabz5n9ZSvJz/L8CVNmK02jLfiw4p1ZjikDULn+B/06GcvzUGds4SbtdlLkqMxn6WXDrbdie472FVi"
   },
   "Kafka": {
     "_topicTableName": "datacollection-instagram-crawler",
     "_commentTableName": "datacollection-instagramcomment-crawler",
-    //"SERVER_LINK": "10.3.48.81:9092,10.3.48.90:9092,10.3.48.91:9092"
-    "SERVER_LINK": "localhost:29092, localhost:39092"
+    "SERVER_LINK": "10.3.48.81:9092,10.3.48.90:9092,10.3.48.91:9092"
+    //"SERVER_LINK": "localhost:29092, localhost:39092"
   },
   "InsQuery": {
     "TopSearchUrl": "https://www.instagram.com/web/search/topsearch/?query=",
@@ -16,5 +22,6 @@
   "UserCrawler": "hanhlv",
   "InstagramDomainUrlOnePose": "https://www.instagram.com/p/",
   "Platform": "instagram",
-  "DeafultLoadUrl": "https://www.instagram.com/_hl.gaukl/"
+  "DeafultLoadUrl": "https://www.instagram.com/_hl.gaukl/",
+  "Proxy": "10.3.51.70:6210"
 }

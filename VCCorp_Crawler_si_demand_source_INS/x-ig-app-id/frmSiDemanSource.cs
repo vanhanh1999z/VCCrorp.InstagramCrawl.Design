@@ -79,34 +79,35 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                 int currIdx = 1;
                 stStatus.Text = "Bắt đầu lấy dữ liệu...";
                 var links = _bll.GetDefaultSourcesidemandINS();
+                string crawlerdate = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
                 if (links != null && links.Count > 0)
                 {
-
                     var totalPost = links.Count.ToString();
                     lblTotal.Text = totalPost;
                     foreach (var link in links)
                     {
-                        if (!this.IsCrawl(DateTime.Parse(link.update_time_crawl), link.frequency)) return;
+                        var isWait = await _bll.IsWait(link.id);
+                        var isCrawl = IsCrawl(DateTime.Parse(link.update_time_crawl), link.frequency);
+
+                        if (!isWait || !isCrawl) { continue; }
+                        _bll.UpdatesidemandsrcINS(link.id, ((int)SiDemandSourceStatus.Processing).ToString(), "Process", "", crawlerdate);
 
                         lblCurr.Text = $"{currIdx} / {totalPost}";
                         txtUrl.Text = link.link;
                         string url = link.link.Replace("https://www.instagram.com", "");
                         url = url.Replace("/", "");
                         var result = await _contentBUS.CrawlInstagram(string.Empty, _browser, url, lblSuccess, lblErr, rtbResult);
-
-
-
                         if (result == State.Erorr)
                         {
                             Logging.Error("Thêm bài viết: " + url + " thất bại!");
-                            _bll.UpdatesidemandsrcINS(link.id, SiDemandSourceStatus.Wait.ToString(), "Done", "", "");
+                            _bll.UpdatesidemandsrcINS(link.id, ((int)SiDemandSourceStatus.Wait).ToString(), "Eror", "", "");
                         }
                         else
                         {
                             string crawlcurrentdate = link.crawlcurrentdate.ToString();
                             crawlcurrentdate = crawlcurrentdate + 1;
-                            string crawlerdate = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
-                            _bll.UpdatesidemandsrcINS(link.id, SiDemandSourceStatus.Done.ToString(), "Done", crawlcurrentdate, crawlerdate);
+
+                            _bll.UpdatesidemandsrcINS(link.id, ((int)SiDemandSourceStatus.Done).ToString(), "Done", crawlcurrentdate, crawlerdate);
 
                             Logging.Infomation("Thêm bài viết: " + url + " thành công!");
                         }
@@ -145,6 +146,5 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
             }
             return false;
         }
-
     }
 }

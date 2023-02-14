@@ -17,21 +17,25 @@ namespace VCCorp_Crawler_si_demand_source_INS
     {
         private int _loading;
         public ChromiumWebBrowser browser;
+
         private static Random random = new Random();
+
         public static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
         public frmMain()
         {
             InitializeComponent();
             var rnd = new Random();
-            //IgRunTime.CachePath = @"C:\CEFSharp_Cache_" + RandomString(6);
-            IgRunTime.CachePath = @"C:\CEFSharp_Cache";
+            IgRunTime.CachePath = @"C:\CEFSharp_Cache_" + RandomString(6);
+            //IgRunTime.CachePath = @"C:\CEFSharp_Cache";
             InitBrowser();
         }
+
         private async void frmMain_LoadAsync(object sender, EventArgs e)
         {
             this.SetEnableMainGroupBox(false);
@@ -45,6 +49,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
             grSiDemand.Enabled = enable;
             grSiDataExcel.Enabled = enable;
         }
+
         public void InitBrowser()
         {
             try
@@ -59,11 +64,10 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     CefSharp.WinForms.CefSettings settings = new CefSharp.WinForms.CefSettings();
                     settings.CachePath = pathCache;
                     settings.LogSeverity = LogSeverity.Disable;
-
+                    settings.CefCommandLineArgs.Add("proxy-server", IgRunTime.Config.Proxy);
                     CefSharp.Cef.Initialize(settings);
                 }
 
-                //Cef.Initialize(new CefSettings());
 
                 _loading = 0;
 
@@ -78,7 +82,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 this.browser.TabIndex = 4;
                 this.pnLogin.Controls.Add(this.browser);
                 browser.LoadingStateChanged += OnLoadingStateChanged;
-                //browser.AddressChanged += OnBrowserAddressChanged;
             }
             catch (Exception ex)
             {
@@ -86,6 +89,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
             }
 
         }
+
         private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
             if (!args.IsLoading)
@@ -130,15 +134,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
             fr.Show();
         }
 
-        // private async void button1_Click(object sender, EventArgs e)
-        // {
-        //     Task<string> ck = IgRunTime.GetGlobalCookie();
-        //     Task<string> html = GetAppIdIns();
-        //     await Task.WhenAll(ck, html);
-        //     Console.WriteLine(html.Result);
-        //     Console.WriteLine(ck.Result);
-        // }
-
         private async Task<string> GetAppIdIns()
         {
             string html = await browser.GetSourceAsync();
@@ -178,6 +173,17 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             frmComment frm = new frmComment();
             frm.Show();
+        }
+
+        private void btnHashtag_Click(object sender, EventArgs e)
+        {
+            var frm = new frmHashtag();
+            frm.Show();
+        }
+
+        private void btnSiDemandSourcePost_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

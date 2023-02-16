@@ -226,6 +226,7 @@
             this.Controls.Add(this.btLoad);
             this.Controls.Add(this.btStart);
             this.Name = "frmCrwSi_data_ExcelPost";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCrwSi_data_ExcelPost";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

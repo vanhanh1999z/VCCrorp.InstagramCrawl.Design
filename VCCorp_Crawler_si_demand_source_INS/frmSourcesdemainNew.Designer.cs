@@ -232,6 +232,7 @@
             this.Controls.Add(this.btStart);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSourcesdemainNew";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmSourcesdemainNew";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

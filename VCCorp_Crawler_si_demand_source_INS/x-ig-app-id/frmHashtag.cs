@@ -1,20 +1,16 @@
-﻿using CefSharp.WinForms;
-using CefSharp;
+﻿using CefSharp;
+using CefSharp.WinForms;
+using Crwal.Core.Base;
 using Crwal.Core.Log;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VCCorp.CrawlerCore.Base;
 using VCCorp.CrawlerCore.BUS;
-using System.Text.RegularExpressions;
-using Crwal.Core.Base;
 using VCCorp.CrawlerCore.BUS.ig_app_id;
 using VCCorp.CrawlerCore.SysEnum;
 
@@ -74,12 +70,10 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                 Logging.Error(ex);
             }
         }
-
         private void btnShowDevtool_Click(object sender, EventArgs e)
         {
             _browser.ShowDevTools();
         }
-
         private async void btnCheckCookir_Click(object sender, EventArgs e)
         {
             try
@@ -89,23 +83,23 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
             }
             catch (Exception ex)
             {
-
                 Logging.Error(ex);
             }
         }
-
         private async void btnStart_Click(object sender, EventArgs e)
         {
             try
             {
                 var tags = await GetHashtagAsync();
+                if (!HasAppId()) { MessageBox.Show("AppId hiện không khả dụng, vui lòng khởi động lại ứng dụng"); return; }
                 if (tags != null && tags.Count > 0)
                 {
                     lblTotal.Text = tags.Count.ToString();
                     foreach (var tag in tags)
                     {
-                        await _browser.LoadUrlAsync("https://www.instagram.com/explore/tags/" + tag);
-                        await Task.Delay(2_000);
+                        string url = "https://www.instagram.com/explore/tags/" + tag;
+                        await _browser.LoadUrlAsync(url);
+                        await Task.Delay(3_000);
                         Logging.Warning("Bắt đàu crawl tag:" + tag);
                         LoopState state = await _hashtagBUS.CrawlData(_browser, tag, lblSuccess, lblErr, rtbResult);
                         if (state == LoopState.Continue || state == LoopState.Ok) continue;
@@ -133,6 +127,10 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
             }
             tags = lstDuplicate.Distinct().ToList();
             return tags;
+        }
+        private bool HasAppId()
+        {
+            return String.IsNullOrEmpty(IgRunTime.AppId) ? false : true;
         }
     }
 }

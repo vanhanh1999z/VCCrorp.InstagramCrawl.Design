@@ -231,6 +231,7 @@
             this.Controls.Add(this.txtUrl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmContentPost";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bóc content User";
             this.Load += new System.EventHandler(this.frmContentPost_Load);
             this.stsTimer.ResumeLayout(false);

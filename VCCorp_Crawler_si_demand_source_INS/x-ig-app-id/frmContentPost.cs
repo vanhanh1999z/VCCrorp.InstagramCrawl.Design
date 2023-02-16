@@ -79,6 +79,11 @@ namespace VCCorp_Crawler_si_demand_source_INS
             try
             {
                 tsStatus.Text = "Loading...";
+                if (String.IsNullOrEmpty(txtUrl.Text))
+                {
+                    MessageBox.Show("Url không được để trống!!!", "Đã có lỗi xảy ra", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 await _browser.LoadUrlAsync(txtUrl.Text);
                 await Task.Delay(3_000);
                 string userNameUrl = Regex.Match(txtUrl.Text, "(?<=https://www.instagram.com/)(.*?)(?=/)").Value;
@@ -90,7 +95,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     tsStatus.Text = "Không lấy được dữ liệu, vui lòng thử lại sau";
                     return;
                 }
-                //tsStatus.Text = "Đang đẩy dữ liệu vào si_source_post, vui lòng đợi";
                 tsStatus.Text = "Đã hoàn tất";
             }
             catch (Exception ex)
@@ -100,7 +104,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 Logging.Error(ex);
             }
         }
-
         private void btShowDevTool_Click(object sender, EventArgs e)
         {
             _browser.ShowDevTools();

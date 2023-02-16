@@ -206,6 +206,7 @@
             this.Controls.Add(this.btLoad);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmFindlSourceID_INS";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmFindlSourceID_INS";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

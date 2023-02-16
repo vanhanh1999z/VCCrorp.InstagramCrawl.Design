@@ -1,5 +1,4 @@
-﻿using Crwal.Core.Base;
-using Crwal.Core.Log;
+﻿using Crwal.Core.Log;
 using Crwal.Core.Sql;
 using Newtonsoft.Json;
 using System;
@@ -7,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using VCCorp.CrawlerCore.Base;
+using VCCorp_Crawler_si_demand_source_INS.x_ig_app_id;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -25,7 +25,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 Program.Init();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new frmMain());
+                Application.Run(new frmCache());
             }
             catch
             {
@@ -48,6 +48,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 else
                 {
                     await Logging.ErrorAsync("Không tìm thấy file cấu hình");
+                    await Logging.ErrorAsync(filePath);
                 }
             }
             catch (Exception ex)

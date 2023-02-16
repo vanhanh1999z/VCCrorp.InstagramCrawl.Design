@@ -232,6 +232,7 @@
             this.Controls.Add(this.btLoad);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSourcedemaind_INS";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bóc source INS";
             this.Load += new System.EventHandler(this.frmSourcedemaind_INS_Load);
             this.groupLeft.ResumeLayout(false);

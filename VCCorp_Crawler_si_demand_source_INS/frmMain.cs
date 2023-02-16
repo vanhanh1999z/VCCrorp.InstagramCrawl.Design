@@ -18,21 +18,9 @@ namespace VCCorp_Crawler_si_demand_source_INS
         private int _loading;
         public ChromiumWebBrowser browser;
 
-        private static Random random = new Random();
-
-        public static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-
         public frmMain()
         {
             InitializeComponent();
-            var rnd = new Random();
-            IgRunTime.CachePath = @"C:\CEFSharp_Cache_" + RandomString(6);
-            //IgRunTime.CachePath = @"C:\CEFSharp_Cache";
             InitBrowser();
         }
 
@@ -46,8 +34,9 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
         private void SetEnableMainGroupBox(bool enable)
         {
-            grSiDemand.Enabled = enable;
-            grSiDataExcel.Enabled = enable;
+            groupBox1.Enabled = enable;
+            groupBox2.Enabled = enable;
+            grCookie.Enabled = enable;
         }
 
         public void InitBrowser()

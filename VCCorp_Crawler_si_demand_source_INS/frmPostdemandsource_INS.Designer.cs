@@ -236,6 +236,7 @@
             this.Controls.Add(this.btLoad);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPostdemandsource_INS";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bóc link Post để lấy comment";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

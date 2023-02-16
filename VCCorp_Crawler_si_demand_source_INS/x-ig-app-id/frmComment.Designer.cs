@@ -48,10 +48,28 @@
             this.btCommentStart = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btCommentCheck = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.pnResult = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rtbResultM = new System.Windows.Forms.RichTextBox();
+            this.pnResultR = new System.Windows.Forms.Panel();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblErrR = new System.Windows.Forms.Label();
+            this.lblSuccessR = new System.Windows.Forms.Label();
+            this.lblCurrR = new System.Windows.Forms.Label();
+            this.lblTotalR = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.statusStrip2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -59,7 +77,7 @@
             this.groupBox1.Controls.Add(this.rtbResult);
             this.groupBox1.Location = new System.Drawing.Point(12, 361);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1032, 202);
+            this.groupBox1.Size = new System.Drawing.Size(781, 202);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dữ liệu...";
@@ -69,7 +87,7 @@
             this.rtbResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbResult.Location = new System.Drawing.Point(7, 19);
             this.rtbResult.Name = "rtbResult";
-            this.rtbResult.Size = new System.Drawing.Size(1016, 175);
+            this.rtbResult.Size = new System.Drawing.Size(766, 175);
             this.rtbResult.TabIndex = 0;
             this.rtbResult.Text = "";
             // 
@@ -217,9 +235,9 @@
             this.btShowDevTool.FlatAppearance.BorderSize = 0;
             this.btShowDevTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btShowDevTool.ForeColor = System.Drawing.Color.White;
-            this.btShowDevTool.Location = new System.Drawing.Point(25, 107);
+            this.btShowDevTool.Location = new System.Drawing.Point(12, 107);
             this.btShowDevTool.Name = "btShowDevTool";
-            this.btShowDevTool.Size = new System.Drawing.Size(153, 29);
+            this.btShowDevTool.Size = new System.Drawing.Size(166, 29);
             this.btShowDevTool.TabIndex = 0;
             this.btShowDevTool.Text = "Dev Tool";
             this.btShowDevTool.TextColor = System.Drawing.Color.White;
@@ -236,9 +254,9 @@
             this.btCommentStart.FlatAppearance.BorderSize = 0;
             this.btCommentStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btCommentStart.ForeColor = System.Drawing.Color.White;
-            this.btCommentStart.Location = new System.Drawing.Point(25, 72);
+            this.btCommentStart.Location = new System.Drawing.Point(12, 70);
             this.btCommentStart.Name = "btCommentStart";
-            this.btCommentStart.Size = new System.Drawing.Size(153, 29);
+            this.btCommentStart.Size = new System.Drawing.Size(166, 29);
             this.btCommentStart.TabIndex = 0;
             this.btCommentStart.Text = "Bắt đầu";
             this.btCommentStart.TextColor = System.Drawing.Color.White;
@@ -255,9 +273,9 @@
             this.btCommentCheck.FlatAppearance.BorderSize = 0;
             this.btCommentCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btCommentCheck.ForeColor = System.Drawing.Color.White;
-            this.btCommentCheck.Location = new System.Drawing.Point(25, 32);
+            this.btCommentCheck.Location = new System.Drawing.Point(12, 32);
             this.btCommentCheck.Name = "btCommentCheck";
-            this.btCommentCheck.Size = new System.Drawing.Size(153, 29);
+            this.btCommentCheck.Size = new System.Drawing.Size(166, 29);
             this.btCommentCheck.TabIndex = 0;
             this.btCommentCheck.Text = "CheckCookie";
             this.btCommentCheck.TextColor = System.Drawing.Color.White;
@@ -268,19 +286,170 @@
             // 
             this.pnResult.Location = new System.Drawing.Point(225, 21);
             this.pnResult.Name = "pnResult";
-            this.pnResult.Size = new System.Drawing.Size(819, 334);
+            this.pnResult.Size = new System.Drawing.Size(683, 334);
             this.pnResult.TabIndex = 3;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rtbResultM);
+            this.groupBox2.Location = new System.Drawing.Point(1002, 361);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(491, 202);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Dữ liệu...";
+            // 
+            // rtbResultM
+            // 
+            this.rtbResultM.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbResultM.Location = new System.Drawing.Point(8, 19);
+            this.rtbResultM.Name = "rtbResultM";
+            this.rtbResultM.Size = new System.Drawing.Size(477, 175);
+            this.rtbResultM.TabIndex = 0;
+            this.rtbResultM.Text = "";
+            // 
+            // pnResultR
+            // 
+            this.pnResultR.Location = new System.Drawing.Point(914, 21);
+            this.pnResultR.Name = "pnResultR";
+            this.pnResultR.Size = new System.Drawing.Size(579, 334);
+            this.pnResultR.TabIndex = 3;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.statusStrip1);
+            this.groupBox5.Controls.Add(this.label2);
+            this.groupBox5.Controls.Add(this.lblErrR);
+            this.groupBox5.Controls.Add(this.lblSuccessR);
+            this.groupBox5.Controls.Add(this.lblCurrR);
+            this.groupBox5.Controls.Add(this.lblTotalR);
+            this.groupBox5.Controls.Add(this.label11);
+            this.groupBox5.Controls.Add(this.label12);
+            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this.label14);
+            this.groupBox5.Location = new System.Drawing.Point(814, 361);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(182, 202);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Thông số";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label2.Location = new System.Drawing.Point(89, 30);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "bài viết";
+            // 
+            // lblErrR
+            // 
+            this.lblErrR.AutoSize = true;
+            this.lblErrR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblErrR.Location = new System.Drawing.Point(131, 112);
+            this.lblErrR.Name = "lblErrR";
+            this.lblErrR.Size = new System.Drawing.Size(13, 13);
+            this.lblErrR.TabIndex = 9;
+            this.lblErrR.Text = "0";
+            // 
+            // lblSuccessR
+            // 
+            this.lblSuccessR.AutoSize = true;
+            this.lblSuccessR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSuccessR.Location = new System.Drawing.Point(142, 83);
+            this.lblSuccessR.Name = "lblSuccessR";
+            this.lblSuccessR.Size = new System.Drawing.Size(13, 13);
+            this.lblSuccessR.TabIndex = 10;
+            this.lblSuccessR.Text = "0";
+            // 
+            // lblCurrR
+            // 
+            this.lblCurrR.AutoSize = true;
+            this.lblCurrR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblCurrR.Location = new System.Drawing.Point(96, 56);
+            this.lblCurrR.Name = "lblCurrR";
+            this.lblCurrR.Size = new System.Drawing.Size(13, 13);
+            this.lblCurrR.TabIndex = 11;
+            this.lblCurrR.Text = "0";
+            // 
+            // lblTotalR
+            // 
+            this.lblTotalR.AutoSize = true;
+            this.lblTotalR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblTotalR.Location = new System.Drawing.Point(61, 30);
+            this.lblTotalR.Name = "lblTotalR";
+            this.lblTotalR.Size = new System.Drawing.Size(13, 13);
+            this.lblTotalR.TabIndex = 12;
+            this.lblTotalR.Text = "0";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 112);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(119, 13);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "Bắn vào Kafka thất bại:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 83);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(138, 13);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Bắn vào Kafka thành công:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 56);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(83, 13);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "Bài bóc hiện tại:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 30);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(49, 13);
+            this.label14.TabIndex = 8;
+            this.label14.Text = "Tổng số:";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 177);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(176, 22);
+            this.statusStrip1.TabIndex = 14;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(74, 17);
+            this.toolStripStatusLabel1.Text = "Trạng thái: ...";
             // 
             // frmComment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1056, 575);
+            this.ClientSize = new System.Drawing.Size(1505, 575);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.pnResultR);
             this.Controls.Add(this.pnResult);
             this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmComment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bóc comment trong si_demand_post";
             this.Load += new System.EventHandler(this.frmComment_Load);
             this.groupBox1.ResumeLayout(false);
@@ -290,6 +459,11 @@
             this.groupBox3.PerformLayout();
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -314,5 +488,20 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnResult;
         private ext.Control.RButton btShowDevTool;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RichTextBox rtbResultM;
+        private System.Windows.Forms.Panel pnResultR;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblErrR;
+        private System.Windows.Forms.Label lblSuccessR;
+        private System.Windows.Forms.Label lblCurrR;
+        private System.Windows.Forms.Label lblTotalR;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

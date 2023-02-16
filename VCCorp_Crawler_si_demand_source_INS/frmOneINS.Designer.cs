@@ -113,6 +113,7 @@
             this.Controls.Add(this.btStart);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmOneINS";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmINS";
             this.Load += new System.EventHandler(this.frmOneINS_Load);
             this.groupLeft.ResumeLayout(false);

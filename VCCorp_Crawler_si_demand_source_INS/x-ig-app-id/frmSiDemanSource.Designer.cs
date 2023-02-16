@@ -88,6 +88,7 @@
             // 
             // txtUrl
             // 
+            this.txtUrl.Enabled = false;
             this.txtUrl.Location = new System.Drawing.Point(22, 20);
             this.txtUrl.Multiline = true;
             this.txtUrl.Name = "txtUrl";
@@ -243,6 +244,7 @@
             this.Controls.Add(this.btCheckCookie);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSiDemanSource";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bóc post theo url của si_deman_source";
             this.Load += new System.EventHandler(this.frmSiDemanSource_Load);
             this.statusStrip1.ResumeLayout(false);

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grChrome = new System.Windows.Forms.GroupBox();
+            this.pnResult = new System.Windows.Forms.Panel();
             this.grResult = new System.Windows.Forms.GroupBox();
             this.rtbResult = new System.Windows.Forms.RichTextBox();
             this.grBtn = new System.Windows.Forms.GroupBox();
@@ -44,7 +45,6 @@
             this.btnStart = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btnCheckCookir = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btnShowDevtool = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
-            this.pnResult = new System.Windows.Forms.Panel();
             this.grChrome.SuspendLayout();
             this.grResult.SuspendLayout();
             this.grBtn.SuspendLayout();
@@ -60,6 +60,13 @@
             this.grChrome.TabIndex = 0;
             this.grChrome.TabStop = false;
             this.grChrome.Text = "Hashtag";
+            // 
+            // pnResult
+            // 
+            this.pnResult.Location = new System.Drawing.Point(7, 20);
+            this.pnResult.Name = "pnResult";
+            this.pnResult.Size = new System.Drawing.Size(862, 378);
+            this.pnResult.TabIndex = 0;
             // 
             // grResult
             // 
@@ -243,13 +250,6 @@
             this.btnShowDevtool.UseVisualStyleBackColor = false;
             this.btnShowDevtool.Click += new System.EventHandler(this.btnShowDevtool_Click);
             // 
-            // pnResult
-            // 
-            this.pnResult.Location = new System.Drawing.Point(7, 20);
-            this.pnResult.Name = "pnResult";
-            this.pnResult.Size = new System.Drawing.Size(862, 378);
-            this.pnResult.TabIndex = 0;
-            // 
             // frmHashtag
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,6 +259,7 @@
             this.Controls.Add(this.grResult);
             this.Controls.Add(this.grChrome);
             this.Name = "frmHashtag";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmHashtag";
             this.Load += new System.EventHandler(this.frmHashtag_Load);
             this.grChrome.ResumeLayout(false);

@@ -94,14 +94,17 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                 if (!HasAppId()) { MessageBox.Show("AppId hiện không khả dụng, vui lòng khởi động lại ứng dụng"); return; }
                 if (tags != null && tags.Count > 0)
                 {
+                    int currentIdx = 0;
                     lblTotal.Text = tags.Count.ToString();
                     foreach (var tag in tags)
                     {
+                        currentIdx++;
+                        lblCurr.Text = currentIdx.ToString(); 
                         string url = "https://www.instagram.com/explore/tags/" + tag;
                         await _browser.LoadUrlAsync(url);
                         await Task.Delay(3_000);
                         Logging.Warning("Bắt đàu crawl tag:" + tag);
-                        LoopState state = await _hashtagBUS.CrawlData(_browser, tag, lblSuccess, lblErr, rtbResult);
+                        LoopState state = await _hashtagBUS.CrawlData(_browser, tag, lblSuccess, lblErr, rtbResult, stStatus);
                         if (state == LoopState.Continue || state == LoopState.Ok) continue;
                         else break;
                     }

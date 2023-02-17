@@ -1,15 +1,24 @@
 ﻿using CefSharp;
+using CefSharp.DevTools;
+using CefSharp.DevTools.Network;
 using CefSharp.WinForms;
+using Crwal.Core.Base;
 using Crwal.Core.Log;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using VCCorp.CrawlerCore.Base;
 using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.BUS.ig_app_id;
+using VCCorp.CrawlerCore.DTO.ig_app_id;
+using VCCorp.CrawlerCore.DTO;
 using VCCorp.CrawlerCore.SysEnum;
+using System.Net;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -18,6 +27,15 @@ namespace VCCorp_Crawler_si_demand_source_INS
         public ChromiumWebBrowser _browser;
         private INSsidemandsourcepostBUS _bll = new INSsidemandsourcepostBUS(IgRunTime.Config.DbConnection.FBExce);
         private ContentBUS _contentBUS = new ContentBUS();
+        private string _ctx = String.Empty;
+        private int _idx = 0;
+        private string _currUrl = String.Empty;
+
+        private Dictionary<string, string> _dic = new Dictionary<string, string>
+        {
+            {"UrlPost", "https://www.instagram.com/api/v1/feed/user" },
+            {"Domain", "https://www.instagram.com" },
+        };
         public frmContentPost()
         {
             InitializeComponent();
@@ -62,15 +80,80 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 this._browser.Size = new System.Drawing.Size(956, 827);
                 this._browser.TabIndex = 4;
                 this.pnView.Controls.Add(this._browser);
-                _browser.LoadingStateChanged += (sender, args) =>
+                _browser.LoadingStateChanged += async (sender, args) =>
                 {
                     var script = VCCorp.CrawlerCore.Base.Request.LoadScriptJs().Result;
                     _browser.ExecuteScriptAsync(script);
+                    var devtool = _browser.GetDevToolsClient();
+                    await devtool.Network.EnableAsync();
+                    devtool.Network.RequestWillBeSent += Network_RequestWillBeSent;
                 };
             }
             catch (Exception ex)
             {
                 Logging.Error(ex);
+            }
+        }
+
+        private async void Network_RequestWillBeSent(object sender, RequestWillBeSentEventArgs e)
+        {
+            try
+            {
+                var devtool = _browser.GetDevToolsClient();
+                if (e.Request.Method == "GET" && e.Request.Url.StartsWith(_dic["UrlPost"]))
+                {
+                    if (e.Request.Url.Equals(_currUrl) == false)
+                    {
+                        _currUrl = e.Request.Url;
+                        var reqId = e.RequestId;
+                        await Task.Delay(2_000);
+                        var res = await devtool.Network.GetResponseBodyAsync(reqId);
+                        if (res != null && res.Body != null)
+                        {
+                            Logging.Infomation(_currUrl);
+                            Logging.Infomation("Lấy context thành công!");
+                            var posts = JsonConvert.DeserializeObject<ContentDTO.Root>(res.Body);
+                            if (posts != null && posts.items != null && posts.items.Count >= 0)
+                            {
+                                Logging.Infomation("Bắt đầu xử lý dữ liệu instagram...");
+                                List<Task<int>> tasks = new List<Task<int>>();
+                                foreach (var post in posts.items)
+                                {
+                                    //Crwal.Core.Base.Utilities.WriteToBox("Lấy thành công bài viết: " + post.pk, rtbResult);
+                                    #region Download image
+                                    if (post.carousel_media_count != null)
+                                    {
+                                        post.carousel_media.ForEach(el =>
+                                        {
+                                            using (WebClient client = new WebClient())
+                                            {
+                                                client.DownloadFile(new Uri(el.image_versions2.candidates[0].url), $@"C:\temp\image{_idx}.jpg");
+                                                _idx++;
+                                            }
+                                        });
+                                    }
+                                    if (post.image_versions2 != null)
+                                    {
+                                        using (WebClient client = new WebClient())
+                                        {
+                                            client.DownloadFile(new Uri(post.image_versions2.candidates[0].url), $@"C:\temp\image{_idx}.jpg");
+                                            _idx++;
+                                        }
+                                    }
+                                    #endregion
+                                }
+                            }
+                            await Task.Delay(3_000);
+                            _browser.ExecuteScriptAsync("window.scrollTo(0, document.body.scrollHeight);");
+                            return;
+                        }
+                        Logging.Infomation("Lấy context thất bại");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                //logging.error(ex);
             }
         }
 
@@ -86,20 +169,22 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 }
                 await _browser.LoadUrlAsync(txtUrl.Text);
                 await Task.Delay(3_000);
-                string userNameUrl = Regex.Match(txtUrl.Text, "(?<=https://www.instagram.com/)(.*?)(?=/)").Value;
+
+                string userNameUrl = txtUrl.Text;
+                userNameUrl = userNameUrl.Replace(_dic["Domain"], "").Replace("/", "");
                 Logging.Infomation("Bắt đầu crawl dữ liệu post...");
-                var tsk = await _contentBUS.CrawlInstagram(String.Empty, _browser, userNameUrl, lblSuccess, lblErr, rtbResult);
-                await Task.Delay(3_000);
-                if (tsk == State.Erorr)
-                {
-                    tsStatus.Text = "Không lấy được dữ liệu, vui lòng thử lại sau";
-                    return;
-                }
+                _currUrl = String.Empty;
+                //var tsk = await _contentBUS.CrawlInstagram(String.Empty, _browser, userNameUrl, lblSuccess, lblErr, rtbResult);
+                //await Task.Delay(3_000);
+                //if (tsk == State.Erorr)
+                //{
+                //    tsStatus.Text = "Không lấy được dữ liệu, vui lòng thử lại sau";
+                //    return;
+                //}
                 tsStatus.Text = "Đã hoàn tất";
             }
             catch (Exception ex)
             {
-
                 tsStatus.Text = "Đã xảy ra sự cố, vui lòng kiểm tra lại!";
                 Logging.Error(ex);
             }
@@ -111,7 +196,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
         private void frmContentPost_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

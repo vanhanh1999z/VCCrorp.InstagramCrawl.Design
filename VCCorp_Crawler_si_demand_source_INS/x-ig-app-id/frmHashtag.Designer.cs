@@ -36,7 +36,7 @@
             this.grState = new System.Windows.Forms.GroupBox();
             this.lblErr = new System.Windows.Forms.Label();
             this.lblSuccess = new System.Windows.Forms.Label();
-            this.btnCurr = new System.Windows.Forms.Label();
+            this.lblCurr = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,10 +45,13 @@
             this.btnStart = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btnCheckCookir = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btnShowDevtool = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.stStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.grChrome.SuspendLayout();
             this.grResult.SuspendLayout();
             this.grBtn.SuspendLayout();
             this.grState.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grChrome
@@ -102,9 +105,10 @@
             // 
             // grState
             // 
+            this.grState.Controls.Add(this.statusStrip1);
             this.grState.Controls.Add(this.lblErr);
             this.grState.Controls.Add(this.lblSuccess);
-            this.grState.Controls.Add(this.btnCurr);
+            this.grState.Controls.Add(this.lblCurr);
             this.grState.Controls.Add(this.label5);
             this.grState.Controls.Add(this.label3);
             this.grState.Controls.Add(this.label2);
@@ -137,15 +141,15 @@
             this.lblSuccess.TabIndex = 0;
             this.lblSuccess.Text = "0";
             // 
-            // btnCurr
+            // lblCurr
             // 
-            this.btnCurr.AutoSize = true;
-            this.btnCurr.ForeColor = System.Drawing.Color.Red;
-            this.btnCurr.Location = new System.Drawing.Point(62, 46);
-            this.btnCurr.Name = "btnCurr";
-            this.btnCurr.Size = new System.Drawing.Size(13, 13);
-            this.btnCurr.TabIndex = 0;
-            this.btnCurr.Text = "0";
+            this.lblCurr.AutoSize = true;
+            this.lblCurr.ForeColor = System.Drawing.Color.Red;
+            this.lblCurr.Location = new System.Drawing.Point(62, 46);
+            this.lblCurr.Name = "lblCurr";
+            this.lblCurr.Size = new System.Drawing.Size(13, 13);
+            this.lblCurr.TabIndex = 0;
+            this.lblCurr.Text = "0";
             // 
             // label5
             // 
@@ -250,6 +254,22 @@
             this.btnShowDevtool.UseVisualStyleBackColor = false;
             this.btnShowDevtool.Click += new System.EventHandler(this.btnShowDevtool_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 123);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(159, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // stStatus
+            // 
+            this.stStatus.Name = "stStatus";
+            this.stStatus.Size = new System.Drawing.Size(74, 17);
+            this.stStatus.Text = "Trạng thái: ...";
+            // 
             // frmHashtag
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,6 +287,8 @@
             this.grBtn.ResumeLayout(false);
             this.grState.ResumeLayout(false);
             this.grState.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -283,12 +305,14 @@
         private System.Windows.Forms.GroupBox grState;
         private System.Windows.Forms.Label lblErr;
         private System.Windows.Forms.Label lblSuccess;
-        private System.Windows.Forms.Label btnCurr;
+        private System.Windows.Forms.Label lblCurr;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnResult;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel stStatus;
     }
 }

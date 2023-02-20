@@ -36,6 +36,7 @@
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.btLoad = new System.Windows.Forms.Button();
             this.btStart = new System.Windows.Forms.Button();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.groupLeft.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -101,11 +102,21 @@
             this.btStart.UseVisualStyleBackColor = true;
             this.btStart.Click += new System.EventHandler(this.btStart_Click);
             // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Location = new System.Drawing.Point(0, 517);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(890, 22);
+            this.statusStrip2.TabIndex = 328;
+            this.statusStrip2.Text = "statusStrip2";
+            this.statusStrip2.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip2_ItemClicked);
+            // 
             // frmOneINS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(890, 539);
+            this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.groupLeft);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtAddress);
@@ -134,5 +145,6 @@
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Button btLoad;
         private System.Windows.Forms.Button btStart;
+        private System.Windows.Forms.StatusStrip statusStrip2;
     }
 }

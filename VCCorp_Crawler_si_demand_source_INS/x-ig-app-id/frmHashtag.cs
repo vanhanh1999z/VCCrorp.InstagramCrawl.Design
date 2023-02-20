@@ -5,13 +5,13 @@ using Crwal.Core.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VCCorp.CrawlerCore.Base;
 using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.BUS.ig_app_id;
+using VCCorp.CrawlerCore.DTO.ig_app_id;
 using VCCorp.CrawlerCore.SysEnum;
 
 namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
@@ -88,6 +88,23 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
         }
         private async void btnStart_Click(object sender, EventArgs e)
         {
+            await CrawlerStarted();
+
+            Timer timer = new Timer();
+            timer.Interval = 1000 * 60 * 60 * 6;
+            timer.Tick += Timer_Tick;
+            timer.Enabled = true;
+
+        }
+
+        private async void Timer_Tick(object sender, EventArgs e)
+        {
+            await CrawlerStarted();
+            stStatus2.Text = "Hệ thống đang tạm nghỉ, sẽ bắt đầu lại sai 6 tiếng sau";
+        }
+
+        private async Task CrawlerStarted()
+        {
             try
             {
                 var tags = await GetHashtagAsync();
@@ -98,14 +115,32 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                     lblTotal.Text = tags.Count.ToString();
                     foreach (var tag in tags)
                     {
+                        await Task.Delay(3_000);
                         currentIdx++;
-                        lblCurr.Text = currentIdx.ToString(); 
-                        string url = "https://www.instagram.com/explore/tags/" + tag;
+                        lblCurr.Text = currentIdx.ToString();
+                        string url = "https://www.instagram.com/explore/tags/" + tag.Hashtag;
                         await _browser.LoadUrlAsync(url);
                         await Task.Delay(3_000);
                         Logging.Warning("Bắt đàu crawl tag:" + tag);
-                        LoopState state = await _hashtagBUS.CrawlData(_browser, tag, lblSuccess, lblErr, rtbResult, stStatus);
-                        if (state == LoopState.Continue || state == LoopState.Ok) continue;
+
+                        // {{MAX_REQUEST}} request sẽ tạm dừng {{DELAY_TIME}}
+                        const int MAX_REQUEST = 50;
+                        const int DELAY_TIME = 1000 * 60 * 30;
+
+                        if (currentIdx > MAX_REQUEST)
+                        {
+                            currentIdx = 0;
+                            stStatus2.Text = "Hệ thống tạm dừng 30p trước khi tiếp tục!";
+                            await Task.Delay(DELAY_TIME);
+                        }
+
+                        LoopState state = await _hashtagBUS.CrawlData(_browser, tag.Hashtag, lblSuccess, lblErr, rtbResult, stStatus);
+                        if (state == LoopState.Continue || state == LoopState.Ok)
+                        {
+                            await _bll.UpdateStatusHashtag(tag.Id, ((int)State.Success).ToString());
+                            Logging.Infomation($"Update {tag.Id} trạng thái:  {((int)State.Success).ToString()}");
+                            continue;
+                        }
                         else break;
                     }
                 }
@@ -115,25 +150,29 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                 Logging.Error(ex);
             }
         }
-        public async Task<List<string>> GetHashtagAsync()
+        /// <summary>
+        /// Lấy danh sách hashtag đã được xử lý
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<HashtagDTO.SiHashtag>> GetHashtagAsync()
         {
-            var tags = new List<String>();
-            List<string> lstHashtag = await _bll.GetHashtags();
-            List<string> lstDuplicate = new List<string>();
+            List<HashtagDTO.SiHashtag> lstHashtag = await _bll.GetHashtags();
+
             for (int i = 0; i < lstHashtag.Count; i++)
             {
-                string rawHashtag = lstHashtag[i];
+                string rawHashtag = lstHashtag[i].Hashtag;
                 string hashtagRemoveSign = HashtagHelper.RemoveSignVietnameseString(rawHashtag);
                 string hashtagRemoveSpace = Regex.Replace(hashtagRemoveSign, @"\s+", "");
                 string hashtagRemoveChar = hashtagRemoveSpace.Replace(".", string.Empty).ToLower();
-                lstDuplicate.Add(hashtagRemoveChar);
+                lstHashtag[i].Hashtag = hashtagRemoveChar;
             }
-            tags = lstDuplicate.Distinct().ToList();
-            return tags;
+            return lstHashtag;
         }
         private bool HasAppId()
         {
             return String.IsNullOrEmpty(IgRunTime.AppId) ? false : true;
         }
+
+
     }
 }

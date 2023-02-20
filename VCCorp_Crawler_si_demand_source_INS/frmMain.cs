@@ -2,9 +2,7 @@
 using CefSharp.WinForms;
 using Crwal.Core.Base;
 using System;
-using System.Data;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;

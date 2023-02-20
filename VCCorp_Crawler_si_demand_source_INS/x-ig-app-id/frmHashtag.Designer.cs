@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.grChrome = new System.Windows.Forms.GroupBox();
             this.pnResult = new System.Windows.Forms.Panel();
             this.grResult = new System.Windows.Forms.GroupBox();
             this.rtbResult = new System.Windows.Forms.RichTextBox();
             this.grBtn = new System.Windows.Forms.GroupBox();
             this.grState = new System.Windows.Forms.GroupBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.stStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblErr = new System.Windows.Forms.Label();
             this.lblSuccess = new System.Windows.Forms.Label();
             this.lblCurr = new System.Windows.Forms.Label();
@@ -45,13 +48,15 @@
             this.btnStart = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btnCheckCookir = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.btnShowDevtool = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.stStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timerStart = new System.Windows.Forms.Timer(this.components);
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.stStatus2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.grChrome.SuspendLayout();
             this.grResult.SuspendLayout();
             this.grBtn.SuspendLayout();
             this.grState.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // grChrome
@@ -86,7 +91,7 @@
             this.rtbResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbResult.Location = new System.Drawing.Point(7, 20);
             this.rtbResult.Name = "rtbResult";
-            this.rtbResult.Size = new System.Drawing.Size(907, 162);
+            this.rtbResult.Size = new System.Drawing.Size(862, 162);
             this.rtbResult.TabIndex = 0;
             this.rtbResult.Text = "";
             // 
@@ -120,6 +125,22 @@
             this.grState.TabIndex = 1;
             this.grState.TabStop = false;
             this.grState.Text = "Trạng thái:";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 123);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(159, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // stStatus
+            // 
+            this.stStatus.Name = "stStatus";
+            this.stStatus.Size = new System.Drawing.Size(74, 17);
+            this.stStatus.Text = "Trạng thái: ...";
             // 
             // lblErr
             // 
@@ -254,27 +275,32 @@
             this.btnShowDevtool.UseVisualStyleBackColor = false;
             this.btnShowDevtool.Click += new System.EventHandler(this.btnShowDevtool_Click);
             // 
-            // statusStrip1
+            // timerStart
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(3, 123);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(159, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
+            this.timerStart.Interval = 1000;
             // 
-            // stStatus
+            // statusStrip2
             // 
-            this.stStatus.Name = "stStatus";
-            this.stStatus.Size = new System.Drawing.Size(74, 17);
-            this.stStatus.Text = "Trạng thái: ...";
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stStatus2});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 618);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(1084, 22);
+            this.statusStrip2.TabIndex = 3;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // stStatus2
+            // 
+            this.stStatus2.Name = "stStatus2";
+            this.stStatus2.Size = new System.Drawing.Size(74, 17);
+            this.stStatus2.Text = "Trạng thái: ...";
             // 
             // frmHashtag
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 620);
+            this.ClientSize = new System.Drawing.Size(1084, 640);
+            this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.grBtn);
             this.Controls.Add(this.grResult);
             this.Controls.Add(this.grChrome);
@@ -289,7 +315,10 @@
             this.grState.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -314,5 +343,8 @@
         private System.Windows.Forms.Panel pnResult;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel stStatus;
+        private System.Windows.Forms.Timer timerStart;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel stStatus2;
     }
 }

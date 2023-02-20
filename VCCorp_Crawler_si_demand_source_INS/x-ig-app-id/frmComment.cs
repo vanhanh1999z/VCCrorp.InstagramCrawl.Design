@@ -4,7 +4,6 @@ using Crwal.Core.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VCCorp.CrawlerCore.Base;
@@ -20,12 +19,13 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
         private INSsidemandsourcepostBUS _soucePost = new INSsidemandsourcepostBUS(IgRunTime.Config.CloudDbConnection.FBExce);
         private ChromiumWebBrowser _browser;
         private ChromiumWebBrowser _browserR;
+        private IEnumerator<string> _enumrator;
         public frmComment()
         {
             InitializeComponent();
             InitBrowser(pnResult);
             InitBrowserR(pnResultR);
-
+            _enumrator = this.GetSource().GetEnumerator();
 
         }
         private async void btCommentCheck_ClickAsync(object sender, EventArgs e)
@@ -45,7 +45,6 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
         {
             var posts = await _soucePost.GetLinkPostAsync();
             var tasks = new List<Task>();
-
             if (posts != null)
             {
                 var lPosts = new List<INSsidemandsourcepostDTO>();
@@ -67,6 +66,16 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                 tasks.Add(CrawlStarted(_browser, String.Empty, lblTotal, lblCurrentPost, lblSuccess, lblErr, rtbResult, lPosts));
                 tasks.Add(CrawlStarted(_browserR, String.Empty, lblTotalR, lblCurrR, lblSuccessR, lblErrR, rtbResultM, rPosts));
                 await Task.WhenAll(tasks);
+            }
+        }
+        public IEnumerable<string> GetSource()
+        {
+            var posts = _soucePost.GetLinkPostAsync();
+            posts.Wait();
+
+            foreach (var post in posts.Result)
+            {
+                yield return post.link;
             }
         }
         public async Task CrawlStarted(ChromiumWebBrowser browser, string nextMinIdJson, Label lblTotal, Label lblCurrent, Label lblSuccess, Label lblErr, RichTextBox rtbResult, List<INSsidemandsourcepostDTO> posts)
@@ -127,7 +136,6 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
         {
             try
             {
-
                 if (!CefSharp.Cef.IsInitialized)
                 {
                     string pathCache = IgRunTime.CachePath;
@@ -142,15 +150,16 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                 }
                 _browserR = new ChromiumWebBrowser(IgRunTime.Config.DeafultLoadUrl);
                 //this.Controls.Add(browser);
+
                 _browserR.Location = new System.Drawing.Point(1, 70);
                 _browserR.MinimumSize = new System.Drawing.Size(20, 20);
                 _browserR.Name = "webbrowser";
                 _browserR.Size = new System.Drawing.Size(956, 827);
                 _browserR.TabIndex = 4;
                 pn.Controls.Add(_browserR);
-                _browserR.LoadingStateChanged += (sender, args) =>
+                _browserR.LoadingStateChanged += async (sender, args) =>
                 {
-                    var script = VCCorp.CrawlerCore.Base.Request.LoadScriptJs().Result;
+                    var script = await VCCorp.CrawlerCore.Base.Request.LoadScriptJs();
                     _browserR.ExecuteScriptAsync(script);
                 };
             }
@@ -164,7 +173,6 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
             _browser.ShowDevTools();
             _browserR.ShowDevTools();
         }
-
         private void frmComment_Load(object sender, EventArgs e)
         {
 

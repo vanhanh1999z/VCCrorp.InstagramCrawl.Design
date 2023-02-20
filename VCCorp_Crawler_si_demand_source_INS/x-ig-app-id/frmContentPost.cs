@@ -1,24 +1,18 @@
 ﻿using CefSharp;
-using CefSharp.DevTools;
 using CefSharp.DevTools.Network;
 using CefSharp.WinForms;
-using Crwal.Core.Base;
 using Crwal.Core.Log;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
+using System.Net;
 using System.Threading.Tasks;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using VCCorp.CrawlerCore.Base;
 using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.BUS.ig_app_id;
 using VCCorp.CrawlerCore.DTO.ig_app_id;
-using VCCorp.CrawlerCore.DTO;
-using VCCorp.CrawlerCore.SysEnum;
-using System.Net;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -95,11 +89,14 @@ namespace VCCorp_Crawler_si_demand_source_INS
             }
         }
 
+
+
         private async void Network_RequestWillBeSent(object sender, RequestWillBeSentEventArgs e)
         {
             try
             {
                 var devtool = _browser.GetDevToolsClient();
+
                 if (e.Request.Method == "GET" && e.Request.Url.StartsWith(_dic["UrlPost"]))
                 {
                     if (e.Request.Url.Equals(_currUrl) == false)
@@ -156,7 +153,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 //logging.error(ex);
             }
         }
-
         private async void btStart_Click(object sender, EventArgs e)
         {
             try

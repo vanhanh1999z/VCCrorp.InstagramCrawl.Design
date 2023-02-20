@@ -396,5 +396,10 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
 
         }
+
+        private void statusStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

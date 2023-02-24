@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crwal.Core", "..\Crwal.Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VCCorp.CrawlerCore", "VCCrorp.InstagramCrawl.Core\VCCorp.CrawlerCore\VCCorp.CrawlerCore.csproj", "{074D63C2-68EF-46BA-A85F-ED72CF876C46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VCCorp.Instagram.CrawlerJob", "VCCorp.Instagram.CrawlerJob\VCCorp.Instagram.CrawlerJob.csproj", "{89139DF2-37C4-4A45-A9AD-9FD162817395}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,14 @@ Global
 		{074D63C2-68EF-46BA-A85F-ED72CF876C46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{074D63C2-68EF-46BA-A85F-ED72CF876C46}.Release|x64.ActiveCfg = Release|x64
 		{074D63C2-68EF-46BA-A85F-ED72CF876C46}.Release|x64.Build.0 = Release|x64
+		{89139DF2-37C4-4A45-A9AD-9FD162817395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89139DF2-37C4-4A45-A9AD-9FD162817395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89139DF2-37C4-4A45-A9AD-9FD162817395}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{89139DF2-37C4-4A45-A9AD-9FD162817395}.Debug|x64.Build.0 = Debug|Any CPU
+		{89139DF2-37C4-4A45-A9AD-9FD162817395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89139DF2-37C4-4A45-A9AD-9FD162817395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89139DF2-37C4-4A45-A9AD-9FD162817395}.Release|x64.ActiveCfg = Release|Any CPU
+		{89139DF2-37C4-4A45-A9AD-9FD162817395}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

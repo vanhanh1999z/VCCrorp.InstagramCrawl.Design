@@ -1,13 +1,14 @@
-﻿using CefSharp;
-using CefSharp.WinForms;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CefSharp;
+using CefSharp.WinForms;
+using Newtonsoft.Json;
 using VCCorp.CrawlerCore.Base;
 using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.Common;
@@ -17,17 +18,20 @@ namespace VCCorp_Crawler_si_demand_source_INS
 {
     public partial class frmPostdemandsource_INS : Form
     {
-        private int _loading;
-        public ChromiumWebBrowser browser;
-        List<INSsidemandsourcepostDTO> _listsidemandPost;
-        INSsidemandsourcepostBUS _bll = new INSsidemandsourcepostBUS(IgRunTime.Config.DbConnection.FBExce);
-        List<kafaCommentINSDTO> _listCmt = new List<kafaCommentINSDTO>();
+        private readonly INSsidemandsourcepostBUS _bll =
+            new INSsidemandsourcepostBUS(IgRunTime.Config.DbConnection.FBExce);
 
-        int _count = 0;
+        private readonly List<kafaCommentINSDTO> _listCmt = new List<kafaCommentINSDTO>();
+
+        private int _count = 0;
         private int _flag;
         private int _indexCurr; // vị trí hiện hành của url bóc
-        string _logFile;
-        string _strId;
+        private List<INSsidemandsourcepostDTO> _listsidemandPost;
+        private int _loading;
+        private string _logFile;
+        private string _strId;
+        public ChromiumWebBrowser browser;
+
         public frmPostdemandsource_INS()
         {
             InitializeComponent();
@@ -41,7 +45,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
         }
 
         /// <summary>
-        /// button load website ra rb
+        ///     button load website ra rb
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -50,26 +54,24 @@ namespace VCCorp_Crawler_si_demand_source_INS
             _loading = 0;
             browser.Load(txtAddress.Text);
         }
+
         /// <summary>
-        /// KHởi tạo cefsharp
+        ///     KHởi tạo cefsharp
         /// </summary>
         public void InitBrowser()
         {
             try
             {
-                if (!CefSharp.Cef.IsInitialized)
+                if (!Cef.IsInitialized)
                 {
-                    string pathCache = @"C:\CEFSharp_Cache";
-                    if (!Directory.Exists(pathCache))
-                    {
-                        Directory.CreateDirectory(pathCache);
-                    }
+                    var pathCache = @"C:\CEFSharp_Cache";
+                    if (!Directory.Exists(pathCache)) Directory.CreateDirectory(pathCache);
 
-                    CefSharp.WinForms.CefSettings settings = new CefSharp.WinForms.CefSettings();
+                    var settings = new CefSettings();
                     settings.CachePath = pathCache;
                     settings.LogSeverity = LogSeverity.Disable;
 
-                    CefSharp.Cef.Initialize(settings);
+                    Cef.Initialize(settings);
                 }
 
                 //Cef.Initialize(new CefSettings());
@@ -78,15 +80,15 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
                 browser = new ChromiumWebBrowser(txtAddress.Text);
 
-                this.Controls.Add(browser);
+                Controls.Add(browser);
 
-                this.browser.Location = new System.Drawing.Point(1, 70);
-                this.browser.MinimumSize = new System.Drawing.Size(20, 20);
-                this.browser.Name = "webBrowser";
-                this.browser.Size = new System.Drawing.Size(956, 827);
-                this.browser.TabIndex = 4;
+                browser.Location = new Point(1, 70);
+                browser.MinimumSize = new Size(20, 20);
+                browser.Name = "webBrowser";
+                browser.Size = new Size(956, 827);
+                browser.TabIndex = 4;
 
-                this.groupLeft.Controls.Add(this.browser);
+                groupLeft.Controls.Add(browser);
 
                 browser.LoadingStateChanged += OnLoadingStateChanged;
                 //browser.AddressChanged += OnBrowserAddressChanged;
@@ -96,17 +98,13 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 //_logFile = "Lỗi " + ex.Message;
                 //WriteLog(_logFile);
             }
-
-
         }
 
         private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
-            if (!args.IsLoading)
-            {
-                _loading = 1;
-            }
+            if (!args.IsLoading) _loading = 1;
         }
+
         private void VarInit()
         {
             _flag = -1;
@@ -114,8 +112,9 @@ namespace VCCorp_Crawler_si_demand_source_INS
             _loading = -1;
             _indexCurr = -1;
         }
+
         /// <summary>
-        /// get source INS trong bảng si_demand_source
+        ///     get source INS trong bảng si_demand_source
         /// </summary>
         private void GetUrlInstargram()
         {
@@ -123,25 +122,28 @@ namespace VCCorp_Crawler_si_demand_source_INS
             {
                 _listsidemandPost = _bll.GetSourcesidemandPostINS();
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+            }
         }
 
         private string GetSourceFromBrowser()
         {
             var task1 = browser.GetSourceAsync();
             task1.Wait();
-            string source = task1.Result;
+            var source = task1.Result;
             return source;
         }
+
         /// <summary>
-        /// Chuyển đổi ngày tháng
+        ///     Chuyển đổi ngày tháng
         /// </summary>
         /// <param name="unixTimeStamp"></param>
         /// <returns></returns>
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
         {
             // Unix timestamp is seconds past epoch
-            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dateTime;
         }
@@ -154,12 +156,14 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 _strId = _listsidemandPost[_indexCurr].post_id;
                 //update trạng thái đang bóc source
                 _bll.UpdatesidemandPostINS(_strId, "1", "");
-                string source = GetSourceFromBrowser();
+                var source = GetSourceFromBrowser();
                 //xóa cặp thẻ không cần thiết để trở về định dạng chuẩn json
-                source = Regex.Replace(source, "(<html)(.*?)(pre-wrap;\">)", " ", RegexOptions.IgnoreCase); // xóa cặp thẻ
+                source = Regex.Replace(source, "(<html)(.*?)(pre-wrap;\">)", " ",
+                    RegexOptions.IgnoreCase); // xóa cặp thẻ
                 source = Regex.Replace(source, "</pre></body></html>", "", RegexOptions.IgnoreCase);
 
                 #region
+
                 //phân tích ra json xong lưu vào db
                 var ObjRoot = JsonConvert.DeserializeObject<INSJsonComment_Post.Root>(source);
                 if (ObjRoot != null)
@@ -168,13 +172,15 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     {
                         foreach (var data in ObjRoot.data.shortcode_media.edge_media_to_comment.edges)
                         {
-                            kafaCommentINSDTO entrydataCmt = new kafaCommentINSDTO();
+                            var entrydataCmt = new kafaCommentINSDTO();
                             entrydataCmt.CommentId = data.node.id;
                             try
                             {
                                 entrydataCmt.CommentText = data.node.text;
                             }
-                            catch { }
+                            catch
+                            {
+                            }
 
                             entrydataCmt.PostId = _listsidemandPost[_indexCurr].post_id;
                             entrydataCmt.Url = "https://www.instagram.com/p/" + _listsidemandPost[_indexCurr].shortcode;
@@ -184,38 +190,40 @@ namespace VCCorp_Crawler_si_demand_source_INS
                             {
                                 entrydataCmt.OwnerProfilePicUrl = data.node.owner.profile_pic_url;
                             }
-                            catch { }
+                            catch
+                            {
+                            }
+
                             try
                             {
                                 entrydataCmt.CreateTime = UnixTimeStampToDateTime(data.node.created_at);
                             }
-                            catch { }
+                            catch
+                            {
+                            }
 
                             //Bắn Post lên kafa
                             _listCmt.Add(entrydataCmt);
                             //await SaveKafraPost(entrydatapost);
                             //Không cần lưu comment mà bắn đi kafa luôn
                         }
+
                         //tìm phân trang
-                        string UserId = _listsidemandPost[_indexCurr].shortcode;
-                        Boolean has_next_page = ObjRoot.data.shortcode_media.edge_media_to_comment.page_info.has_next_page;
-                        string nextPage = ObjRoot.data.shortcode_media.edge_media_to_comment.page_info.end_cursor;
-                        if (has_next_page = true && !string.IsNullOrEmpty(nextPage))
-                        {
-                            endursor(UserId, nextPage);
-                        }
+                        var UserId = _listsidemandPost[_indexCurr].shortcode;
+                        var has_next_page = ObjRoot.data.shortcode_media.edge_media_to_comment.page_info.has_next_page;
+                        var nextPage = ObjRoot.data.shortcode_media.edge_media_to_comment.page_info.end_cursor;
+                        if (has_next_page = true && !string.IsNullOrEmpty(nextPage)) endursor(UserId, nextPage);
 
                         _bll.UpdatesidemandPostINS(_strId, "2", "");
                     }
+
                     _flag = 2;
                 }
-                else
-                {
-                    //lỗi source ko lấy đc data update trạng thái source = -1
-                    //_bll.UpdatesidemandINS(_strId, "-1");
-                }
-                #endregion
 
+                //lỗi source ko lấy đc data update trạng thái source = -1
+                //_bll.UpdatesidemandINS(_strId, "-1");
+
+                #endregion
             }
             catch (Exception ex)
             {
@@ -225,8 +233,9 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 // _bll.UpdatesidemandINS(_strId, "-1");
             }
         }
+
         /// <summary>
-        /// Bắn Post lên kafka
+        ///     Bắn Post lên kafka
         /// </summary>
         /// <param name="postDTO"></param>
         /// <returns></returns>
@@ -234,25 +243,25 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             try
             {
-                string a = "";
-                string messagejson = postDTO.ToJson();
+                var a = "";
+                var messagejson = postDTO.ToJson();
                 // Bắn data cmt
-                string intfag = await KafkaBll.PutOnKafkaCmtINS(messagejson);
+                var intfag = await KafkaBll.PutOnKafkaCmtINS(messagejson);
             }
             catch (Exception ex)
             {
                 //MessageBox.Show("Lỗi phần SaveKafra" + ex);
             }
         }
+
         private void Crawler()
         {
             CrawlerAndSend();
             _flag = 2;
-
         }
 
         /// <summary>
-        /// Load data ở những trang tiếp theo
+        ///     Load data ở những trang tiếp theo
         /// </summary>
         /// <param name="strid"></param>
         /// <param name="endcursor"></param>
@@ -260,26 +269,28 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             try
             {
-                List<INSsidemandsourcepostDTO> listPostINS = new List<INSsidemandsourcepostDTO>();
+                var listPostINS = new List<INSsidemandsourcepostDTO>();
 
-                string urlpage = "https://www.instagram.com/graphql/query/?query_hash=33ba35852cb50da46f5b5e889df7d159&variables=%7B%22shortcode%22:%22" + shortcode + "%22,%22first%22:100,%22after%22:%22" + endcursor + "%22%7D";
+                var urlpage =
+                    "https://www.instagram.com/graphql/query/?query_hash=33ba35852cb50da46f5b5e889df7d159&variables=%7B%22shortcode%22:%22" +
+                    shortcode + "%22,%22first%22:100,%22after%22:%22" + endcursor + "%22%7D";
                 browser.Load(urlpage);
                 Thread.Sleep(6000);
-                string source = GetSourceFromBrowser();
+                var source = GetSourceFromBrowser();
                 //xóa cặp thẻ không cần thiết để trở về định dạng chuẩn json
-                source = Regex.Replace(source, "(<html)(.*?)(pre-wrap;\">)", " ", RegexOptions.IgnoreCase); // xóa cặp thẻ
+                source = Regex.Replace(source, "(<html)(.*?)(pre-wrap;\">)", " ",
+                    RegexOptions.IgnoreCase); // xóa cặp thẻ
                 source = Regex.Replace(source, "</pre></body></html>", "", RegexOptions.IgnoreCase);
 
                 #region
+
                 //phân tích ra json xong lưu vào db
                 var ObjRoot = JsonConvert.DeserializeObject<INSJsonComment_Post.Root>(source);
                 if (ObjRoot != null)
-                {
                     if (ObjRoot.data != null)
-                    {
                         foreach (var data in ObjRoot.data.shortcode_media.edge_media_to_comment.edges)
                         {
-                            kafaCommentINSDTO entrydataCmt = new kafaCommentINSDTO();
+                            var entrydataCmt = new kafaCommentINSDTO();
                             entrydataCmt.CommentId = data.node.id;
                             entrydataCmt.CommentText = data.node.text;
                             entrydataCmt.PostId = _listsidemandPost[_indexCurr].post_id;
@@ -294,22 +305,18 @@ namespace VCCorp_Crawler_si_demand_source_INS
                             //await SaveKafraPost(entrydatapost);
                             //Không cần lưu comment mà bắn đi kafa luôn
                         }
-                        //tìm phân trang
-                        //string UserId = _listsidemandPost[_indexCurr].shortcode;
-                        //Boolean has_next_page = ObjRoot.data.shortcode_media.edge_media_to_comment.page_info.has_next_page;
-                        //string nextPage = ObjRoot.data.shortcode_media.edge_media_to_comment.page_info.end_cursor;
-                        //if (has_next_page = true && !string.IsNullOrEmpty(nextPage))
-                        //{
-                        //    endursor(UserId, nextPage);
-                        //}
-                    }
-                }
-                else
-                {
-                    //lỗi source ko lấy đc data update trạng thái source = -1
-                    //_bll.UpdatesidemandINS(_strId, "-1");
-                }
+                //tìm phân trang
+                //string UserId = _listsidemandPost[_indexCurr].shortcode;
+                //Boolean has_next_page = ObjRoot.data.shortcode_media.edge_media_to_comment.page_info.has_next_page;
+                //string nextPage = ObjRoot.data.shortcode_media.edge_media_to_comment.page_info.end_cursor;
+                //if (has_next_page = true && !string.IsNullOrEmpty(nextPage))
+                //{
+                //    endursor(UserId, nextPage);
+                //}
+                //lỗi source ko lấy đc data update trạng thái source = -1
+                //_bll.UpdatesidemandINS(_strId, "-1");
             }
+
             #endregion
 
             catch (Exception ex)
@@ -320,7 +327,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
         private void btPause_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btStart_Click(object sender, EventArgs e)
@@ -332,10 +339,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             timerStart.Interval = 1000;
 
-            if (_loading == 0)
-            {
-                return;
-            }
+            if (_loading == 0) return;
 
             if (_listsidemandPost == null || _listsidemandPost.Count == 0)
             {
@@ -351,6 +355,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
             if (_flag == -1)
             {
                 #region load link ra trình duyệt
+
                 _indexCurr = _listsidemandPost.FindIndex(x => x.IsCrawled == false);
                 if (_indexCurr == -1)
                 {
@@ -369,9 +374,9 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 _loading = 0;
                 browser.Load(txtAddress.Text);
 
-                int sec = 15;
+                var sec = 15;
 
-                Random ran = new Random();
+                var ran = new Random();
                 sec = ran.Next(20, 30);
 
                 timerStart.Interval = 1000 * sec;
@@ -381,26 +386,24 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 _flag = 0;
 
                 return;
+
                 #endregion
             }
 
             if (_flag == 0)
             {
                 _flag = 1;
-                Thread th = new Thread(new ThreadStart(Crawler));
+                var th = new Thread(Crawler);
                 th.Start();
             }
 
-            if (_flag == 1)
-            {
-                return;
-            }
+            if (_flag == 1) return;
 
             if (_flag == 2) // xong
             {
                 _listsidemandPost[_indexCurr].IsCrawled = true;
                 _flag = -1; // trả cờ
-                _indexCurr = -1;// trả cờ
+                _indexCurr = -1; // trả cờ
 
                 return;
             }
@@ -413,7 +416,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 btStart.Enabled = true;
                 VarInit();
                 GetUrlInstargram();
-                return;
             }
         }
     }

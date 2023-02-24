@@ -59,8 +59,7 @@
               : using a System.ComponentModel.TypeConverter
               : and then encoded with base64 encoding.
       -->
-    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
-                id="root"
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root"
                 xmlns="">
         <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
         <xsd:element name="root" msdata:IsDataSet="true">
@@ -123,13 +122,13 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
-    <metadata name="stsTimer.TrayLocation"
+    <metadata name="ni.TrayLocation"
               type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
         <value>17, 17</value>
     </metadata>
     <assembly alias="System.Drawing"
               name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-    <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing"
+    <data name="ni.Icon" type="System.Drawing.Icon, System.Drawing"
           mimetype="application/x-microsoft.net.object.bytearray.base64">
         <value>
             AAABAAEAMDAAAAEAIACoJQAAFgAAACgAAAAwAAAAYAAAAAEAIAAAAAAAgCUAAAAAAAAAAAAAAAAAAAAA

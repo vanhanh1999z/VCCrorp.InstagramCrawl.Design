@@ -1,13 +1,14 @@
-﻿using CefSharp;
-using CefSharp.WinForms;
-using Crwal.Core.Base;
-using System;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VCCorp.CrawlerCore.Base;
+using CefSharp;
+using CefSharp.WinForms;
+using Crwal.Core.Base;
 using VCCorp_Crawler_si_demand_source_INS.x_ig_app_id;
+using VCCorp.CrawlerCore.Base;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -24,10 +25,10 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
         private async void frmMain_LoadAsync(object sender, EventArgs e)
         {
-            this.SetEnableMainGroupBox(false);
+            SetEnableMainGroupBox(false);
             await Task.Delay(4_000);
             IgRunTime.AppId = await GetAppIdIns();
-            this.SetEnableMainGroupBox(true);
+            SetEnableMainGroupBox(true);
         }
 
         private void SetEnableMainGroupBox(bool enable)
@@ -41,18 +42,15 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             try
             {
-                if (!CefSharp.Cef.IsInitialized)
+                if (!Cef.IsInitialized)
                 {
-                    string pathCache = IgRunTime.CachePath;
-                    if (!Directory.Exists(pathCache))
-                    {
-                        Directory.CreateDirectory(pathCache);
-                    }
-                    CefSharp.WinForms.CefSettings settings = new CefSharp.WinForms.CefSettings();
+                    var pathCache = IgRunTime.CachePath;
+                    if (!Directory.Exists(pathCache)) Directory.CreateDirectory(pathCache);
+                    var settings = new CefSettings();
                     settings.CachePath = pathCache;
                     settings.LogSeverity = LogSeverity.Disable;
                     settings.CefCommandLineArgs.Add("proxy-server", IgRunTime.Config.Proxy);
-                    CefSharp.Cef.Initialize(settings);
+                    Cef.Initialize(settings);
                 }
 
 
@@ -60,72 +58,68 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
                 browser = new ChromiumWebBrowser("https://www.instagram.com/");
 
-                this.Controls.Add(browser);
+                Controls.Add(browser);
 
-                this.browser.Location = new System.Drawing.Point(1, 70);
-                this.browser.MinimumSize = new System.Drawing.Size(20, 20);
-                this.browser.Name = "webBrowser";
-                this.browser.Size = new System.Drawing.Size(956, 827);
-                this.browser.TabIndex = 4;
-                this.pnLogin.Controls.Add(this.browser);
+                browser.Location = new Point(1, 70);
+                browser.MinimumSize = new Size(20, 20);
+                browser.Name = "webBrowser";
+                browser.Size = new Size(956, 827);
+                browser.TabIndex = 4;
+                pnLogin.Controls.Add(browser);
                 browser.LoadingStateChanged += OnLoadingStateChanged;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
-            if (!args.IsLoading)
-            {
-                _loading = 1;
-            }
+            if (!args.IsLoading) _loading = 1;
         }
 
         private void btPostINS_Click(object sender, EventArgs e)
         {
-            frmSourcedemaind_INS fr = new frmSourcedemaind_INS();
+            var fr = new frmSourcedemaind_INS();
             fr.Show();
         }
 
         private void btCmtINS_Click(object sender, EventArgs e)
         {
-            frmPostdemandsource_INS fr = new frmPostdemandsource_INS();
+            var fr = new frmPostdemandsource_INS();
             fr.Show();
         }
 
         private void btSourcStatus0_Click(object sender, EventArgs e)
         {
-            frmSourcesdemainNew fr = new frmSourcesdemainNew();
+            var fr = new frmSourcesdemainNew();
             fr.Show();
         }
 
         private void btFindsourceID_Click(object sender, EventArgs e)
         {
-            frmFindlSourceID_INS fr = new frmFindlSourceID_INS();
+            var fr = new frmFindlSourceID_INS();
             fr.Show();
         }
 
         private void btCrwSidataExcel_Click(object sender, EventArgs e)
         {
-            frmCrwSi_data_ExcelPost fr = new frmCrwSi_data_ExcelPost();
+            var fr = new frmCrwSi_data_ExcelPost();
             fr.Show();
         }
 
         private void btINS_Click(object sender, EventArgs e)
         {
-            frmOneINS fr = new frmOneINS();
+            var fr = new frmOneINS();
             fr.Show();
         }
 
         private async Task<string> GetAppIdIns()
         {
-            string html = await browser.GetSourceAsync();
-            html = this.CleanHtml(html);
-            string appId = Utilities.RegexFilter(html, "(?<=appId\":)(.*?)(?=,)");
+            var html = await browser.GetSourceAsync();
+            html = CleanHtml(html);
+            var appId = Utilities.RegexFilter(html, "(?<=appId\":)(.*?)(?=,)");
             return appId;
         }
 
@@ -138,8 +132,8 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
         private async void btGetId_Click(object sender, EventArgs e)
         {
-            Task<string> ck = IgRunTime.GetGlobalCookie();
-            Task<string> id = GetAppIdIns();
+            var ck = IgRunTime.GetGlobalCookie();
+            var id = GetAppIdIns();
             await Task.WhenAll(ck, id);
             MessageBox.Show($@"AppId: {id.Result} \n Cookie: {ck.Result}");
         }
@@ -158,7 +152,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
         private void btComment_Click(object sender, EventArgs e)
         {
-            frmComment frm = new frmComment();
+            var frm = new frmComment();
             frm.Show();
         }
 
@@ -170,8 +164,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
         private void btnSiDemandSourcePost_Click(object sender, EventArgs e)
         {
-
         }
     }
-
 }

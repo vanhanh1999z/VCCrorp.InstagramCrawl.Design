@@ -45,26 +45,32 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnStart = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
-            this.btnCheckCookir = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
-            this.btnShowDevtool = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
             this.timerStart = new System.Windows.Forms.Timer(this.components);
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.stStatus2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblQuery = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dgvMain = new System.Windows.Forms.DataGridView();
+            this.btnStart = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
+            this.btnCheckCookir = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
+            this.btnShowDevtool = new VCCorp_Crawler_si_demand_source_INS.ext.Control.RButton();
+            this.clHashtag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grChrome.SuspendLayout();
             this.grResult.SuspendLayout();
             this.grBtn.SuspendLayout();
             this.grState.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.SuspendLayout();
             // 
             // grChrome
             // 
             this.grChrome.Controls.Add(this.pnResult);
-            this.grChrome.Location = new System.Drawing.Point(197, 12);
+            this.grChrome.Location = new System.Drawing.Point(197, 41);
             this.grChrome.Name = "grChrome";
-            this.grChrome.Size = new System.Drawing.Size(875, 404);
+            this.grChrome.Size = new System.Drawing.Size(875, 375);
             this.grChrome.TabIndex = 0;
             this.grChrome.TabStop = false;
             this.grChrome.Text = "Hashtag";
@@ -218,6 +224,54 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Tổng số:";
             // 
+            // timerStart
+            // 
+            this.timerStart.Interval = 1000;
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stStatus2});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 618);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(1351, 22);
+            this.statusStrip2.TabIndex = 3;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // stStatus2
+            // 
+            this.stStatus2.Name = "stStatus2";
+            this.stStatus2.Size = new System.Drawing.Size(74, 17);
+            this.stStatus2.Text = "Trạng thái: ...";
+            // 
+            // lblQuery
+            // 
+            this.lblQuery.Location = new System.Drawing.Point(272, 15);
+            this.lblQuery.Name = "lblQuery";
+            this.lblQuery.Size = new System.Drawing.Size(794, 20);
+            this.lblQuery.TabIndex = 4;
+            this.lblQuery.TextChanged += new System.EventHandler(this.lblQuery_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(211, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Query";
+            // 
+            // dgvMain
+            // 
+            this.dgvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clHashtag,
+            this.clId});
+            this.dgvMain.Location = new System.Drawing.Point(1079, 18);
+            this.dgvMain.Name = "dgvMain";
+            this.dgvMain.Size = new System.Drawing.Size(260, 592);
+            this.dgvMain.TabIndex = 6;
+            // 
             // btnStart
             // 
             this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(76)))), ((int)(((byte)(92)))));
@@ -275,31 +329,26 @@
             this.btnShowDevtool.UseVisualStyleBackColor = false;
             this.btnShowDevtool.Click += new System.EventHandler(this.btnShowDevtool_Click);
             // 
-            // timerStart
+            // clHashtag
             // 
-            this.timerStart.Interval = 1000;
+            this.clHashtag.DataPropertyName = "hashtag";
+            this.clHashtag.HeaderText = "Hastag";
+            this.clHashtag.Name = "clHashtag";
             // 
-            // statusStrip2
+            // clId
             // 
-            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stStatus2});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 618);
-            this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1084, 22);
-            this.statusStrip2.TabIndex = 3;
-            this.statusStrip2.Text = "statusStrip2";
-            // 
-            // stStatus2
-            // 
-            this.stStatus2.Name = "stStatus2";
-            this.stStatus2.Size = new System.Drawing.Size(74, 17);
-            this.stStatus2.Text = "Trạng thái: ...";
+            this.clId.DataPropertyName = "id";
+            this.clId.HeaderText = "Id";
+            this.clId.Name = "clId";
             // 
             // frmHashtag
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 640);
+            this.ClientSize = new System.Drawing.Size(1351, 640);
+            this.Controls.Add(this.dgvMain);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblQuery);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.grBtn);
             this.Controls.Add(this.grResult);
@@ -317,6 +366,7 @@
             this.statusStrip1.PerformLayout();
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,5 +396,10 @@
         private System.Windows.Forms.Timer timerStart;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel stStatus2;
+        private System.Windows.Forms.TextBox lblQuery;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dgvMain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clHashtag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clId;
     }
 }

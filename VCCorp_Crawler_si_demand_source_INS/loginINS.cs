@@ -1,8 +1,9 @@
-﻿using CefSharp;
-using CefSharp.WinForms;
-using System;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using CefSharp;
+using CefSharp.WinForms;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
@@ -10,6 +11,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
     {
         private int _loading;
         public ChromiumWebBrowser browser;
+
         public loginINS()
         {
             InitializeComponent();
@@ -20,19 +22,16 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             try
             {
-                if (!CefSharp.Cef.IsInitialized)
+                if (!Cef.IsInitialized)
                 {
-                    string pathCache = @"C:\CEFSharp_Cache";
-                    if (!Directory.Exists(pathCache))
-                    {
-                        Directory.CreateDirectory(pathCache);
-                    }
+                    var pathCache = @"C:\CEFSharp_Cache";
+                    if (!Directory.Exists(pathCache)) Directory.CreateDirectory(pathCache);
 
-                    CefSharp.WinForms.CefSettings settings = new CefSharp.WinForms.CefSettings();
+                    var settings = new CefSettings();
                     settings.CachePath = pathCache;
                     settings.LogSeverity = LogSeverity.Disable;
 
-                    CefSharp.Cef.Initialize(settings);
+                    Cef.Initialize(settings);
                 }
 
                 //Cef.Initialize(new CefSettings());
@@ -41,31 +40,28 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
                 browser = new ChromiumWebBrowser(txtAddress.Text);
 
-                this.Controls.Add(browser);
+                Controls.Add(browser);
 
-                this.browser.Location = new System.Drawing.Point(1, 70);
-                this.browser.MinimumSize = new System.Drawing.Size(20, 20);
-                this.browser.Name = "webBrowser";
-                this.browser.Size = new System.Drawing.Size(956, 827);
-                this.browser.TabIndex = 4;
-                this.groupLeft.Controls.Add(this.browser);
+                browser.Location = new Point(1, 70);
+                browser.MinimumSize = new Size(20, 20);
+                browser.Name = "webBrowser";
+                browser.Size = new Size(956, 827);
+                browser.TabIndex = 4;
+                groupLeft.Controls.Add(browser);
                 browser.LoadingStateChanged += OnLoadingStateChanged;
                 //browser.AddressChanged += OnBrowserAddressChanged;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
-
         }
+
         private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
         {
-            if (!args.IsLoading)
-            {
-                _loading = 1;
-            }
+            if (!args.IsLoading) _loading = 1;
         }
+
         private void btLoad_Click(object sender, EventArgs e)
         {
             _loading = 0;
@@ -74,7 +70,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
 
         private void loginINS_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

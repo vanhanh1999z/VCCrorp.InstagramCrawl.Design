@@ -5,10 +5,9 @@ using System.Windows.Forms;
 using Crwal.Core.Log;
 using Crwal.Core.Sql;
 using Newtonsoft.Json;
-using VCCorp_Crawler_si_demand_source_INS.x_ig_app_id;
 using VCCorp.CrawlerCore.Base;
 
-namespace VCCorp_Crawler_si_demand_source_INS
+namespace VCCorp.Instagram.CrawlerJob
 {
     internal static class Program
     {
@@ -20,16 +19,10 @@ namespace VCCorp_Crawler_si_demand_source_INS
         {
             var projectName = Assembly.GetExecutingAssembly().GetName().Name;
             Logging.Init(projectName);
-            try
-            {
-                Init();
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new frmCache());
-            }
-            catch
-            {
-            }
+            Init();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frmLogin());
         }
 
         public static async void Init()
@@ -89,6 +82,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
             }
             catch (Exception ex)
             {
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config", "system.hcf");
                 Logging.Error(ex);
             }
         }

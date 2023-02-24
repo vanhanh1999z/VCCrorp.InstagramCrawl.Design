@@ -1,35 +1,43 @@
-﻿using CefSharp;
-using CefSharp.DevTools.Network;
-using CefSharp.WinForms;
-using Crwal.Core.Log;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CefSharp;
+using CefSharp.DevTools.Network;
+using CefSharp.WinForms;
+using Crwal.Core.Base;
+using Crwal.Core.Log;
+using Newtonsoft.Json;
 using VCCorp.CrawlerCore.Base;
 using VCCorp.CrawlerCore.BUS;
 using VCCorp.CrawlerCore.BUS.ig_app_id;
+using VCCorp.CrawlerCore.DTO;
 using VCCorp.CrawlerCore.DTO.ig_app_id;
+using Request = VCCorp.CrawlerCore.Base.Request;
+using Utilities = Crwal.Core.Base.Utilities;
 
 namespace VCCorp_Crawler_si_demand_source_INS
 {
     public partial class frmContentPost : Form
     {
-        public ChromiumWebBrowser _browser;
-        private INSsidemandsourcepostBUS _bll = new INSsidemandsourcepostBUS(IgRunTime.Config.DbConnection.FBExce);
-        private ContentBUS _contentBUS = new ContentBUS();
-        private string _ctx = String.Empty;
-        private int _idx = 0;
-        private string _currUrl = String.Empty;
+        private readonly INSsidemandsourcepostBUS _bll =
+            new INSsidemandsourcepostBUS(IgRunTime.Config.CloudDbConnection.FBExce);
 
-        private Dictionary<string, string> _dic = new Dictionary<string, string>
+        private readonly Dictionary<string, string> _dic = new Dictionary<string, string>
         {
-            {"UrlPost", "https://www.instagram.com/api/v1/feed/user" },
-            {"Domain", "https://www.instagram.com" },
+            { "UrlPost", "https://www.instagram.com/api/v1/feed/user" },
+            { "Domain", "https://www.instagram.com" }
         };
+
+        public ChromiumWebBrowser _browser;
+        private ContentBUS _contentBUS = new ContentBUS();
+        private string _ctx = string.Empty;
+        private string _currUrl = string.Empty;
+
+        private int _idx = 0;
+
         public frmContentPost()
         {
             InitializeComponent();
@@ -45,38 +53,37 @@ namespace VCCorp_Crawler_si_demand_source_INS
             }
             catch (Exception ex)
             {
-
                 Logging.Error(ex);
             }
         }
+
         public void InitBrowser()
         {
             try
             {
-                if (!CefSharp.Cef.IsInitialized)
+                if (!Cef.IsInitialized)
                 {
-                    string pathCache = IgRunTime.CachePath;
-                    if (!Directory.Exists(pathCache))
-                    {
-                        Directory.CreateDirectory(pathCache);
-                    }
-                    CefSharp.WinForms.CefSettings settings = new CefSharp.WinForms.CefSettings();
+                    var pathCache = IgRunTime.CachePath;
+                    if (!Directory.Exists(pathCache)) Directory.CreateDirectory(pathCache);
+                    var settings = new CefSettings();
                     settings.CachePath = pathCache;
                     settings.LogSeverity = LogSeverity.Disable;
-                    CefSharp.Cef.Initialize(settings);
+                    Cef.Initialize(settings);
                 }
+
                 //Cef.Initialize(new CefSettings());
                 _browser = new ChromiumWebBrowser(IgRunTime.Config.DeafultLoadUrl);
-                this.Controls.Add(_browser);
-                this._browser.Location = new System.Drawing.Point(1, 70);
-                this._browser.MinimumSize = new System.Drawing.Size(20, 20);
-                this._browser.Name = "web_browser";
-                this._browser.Size = new System.Drawing.Size(956, 827);
-                this._browser.TabIndex = 4;
-                this.pnView.Controls.Add(this._browser);
+                _browser = new ChromiumWebBrowser();
+                Controls.Add(_browser);
+                _browser.Location = new Point(1, 70);
+                _browser.MinimumSize = new Size(20, 20);
+                _browser.Name = "web_browser";
+                _browser.Size = new Size(956, 827);
+                _browser.TabIndex = 4;
+                pnView.Controls.Add(_browser);
                 _browser.LoadingStateChanged += async (sender, args) =>
                 {
-                    var script = VCCorp.CrawlerCore.Base.Request.LoadScriptJs().Result;
+                    var script = Request.LoadScriptJs().Result;
                     _browser.ExecuteScriptAsync(script);
                     var devtool = _browser.GetDevToolsClient();
                     await devtool.Network.EnableAsync();
@@ -90,7 +97,6 @@ namespace VCCorp_Crawler_si_demand_source_INS
         }
 
 
-
         private async void Network_RequestWillBeSent(object sender, RequestWillBeSentEventArgs e)
         {
             try
@@ -98,78 +104,117 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 var devtool = _browser.GetDevToolsClient();
 
                 if (e.Request.Method == "GET" && e.Request.Url.StartsWith(_dic["UrlPost"]))
-                {
                     if (e.Request.Url.Equals(_currUrl) == false)
                     {
                         _currUrl = e.Request.Url;
                         var reqId = e.RequestId;
-                        await Task.Delay(2_000);
+                        await Task.Delay(2500);
                         var res = await devtool.Network.GetResponseBodyAsync(reqId);
                         if (res != null && res.Body != null)
                         {
-                            Logging.Infomation(_currUrl);
-                            Logging.Infomation("Lấy context thành công!");
+                            _currUrl.Infomation();
+                            "Lấy context thành công!".Infomation();
                             var posts = JsonConvert.DeserializeObject<ContentDTO.Root>(res.Body);
+
                             if (posts != null && posts.items != null && posts.items.Count >= 0)
                             {
-                                Logging.Infomation("Bắt đầu xử lý dữ liệu instagram...");
-                                List<Task<int>> tasks = new List<Task<int>>();
+                                "Bắt đầu xử lý dữ liệu instagram...".Infomation();
                                 foreach (var post in posts.items)
                                 {
-                                    //Crwal.Core.Base.Utilities.WriteToBox("Lấy thành công bài viết: " + post.pk, rtbResult);
-                                    #region Download image
-                                    if (post.carousel_media_count != null)
+                                    var pos = new INSsidemandsourcepostDTO
                                     {
-                                        post.carousel_media.ForEach(el =>
-                                        {
-                                            using (WebClient client = new WebClient())
-                                            {
-                                                client.DownloadFile(new Uri(el.image_versions2.candidates[0].url), $@"C:\temp\image{_idx}.jpg");
-                                                _idx++;
-                                            }
-                                        });
-                                    }
-                                    if (post.image_versions2 != null)
+                                        post_id = post.pk,
+                                        platform = IgRunTime.Config.Platform,
+                                        link = IgRunTime.Config.InstagramDomainUrlOnePose + post.code,
+                                        title = post.caption != null ? post.caption.text : "",
+                                        creat_time = Utilities.UnixTimestampToDateTime(post.taken_at),
+                                        status = 0.ToString(),
+                                        total_comment = post.comment_count,
+                                        total_like = post.like_count,
+                                        total_share = 0,
+                                        user_crawler = IgRunTime.Config.UserCrawler,
+                                        fullName = post.user.full_name != null ? post.user.full_name : "",
+                                        si_demand_source_id = "0"
+                                    };
+                                    var entdatakafapost = new kafaPostINSDTO
                                     {
-                                        using (WebClient client = new WebClient())
-                                        {
-                                            client.DownloadFile(new Uri(post.image_versions2.candidates[0].url), $@"C:\temp\image{_idx}.jpg");
-                                            _idx++;
-                                        }
-                                    }
-                                    #endregion
+                                        Id = post.pk != null ? post.pk : "",
+                                        Message = post.caption != null ? post.caption.text : "",
+                                        ShortCode = post.code != null ? post.code : "",
+                                        Link = IgRunTime.Config.InstagramDomainUrlOnePose + post.code,
+                                        TotalComment = post.comment_count,
+                                        TotalLike = post.like_count,
+                                        TotalShare = 0,
+                                        TotalReaction = 0,
+                                        ImagePost = post.carousel_media_count > 0
+                                            ? post.carousel_media[0].image_versions2.candidates[0].url
+                                            : "",
+                                        Platform = IgRunTime.Config.Platform,
+                                        CreateTime = Utilities.UnixTimestampToDateTime(post.taken_at),
+                                        TimeCrw = DateTime.Now,
+                                        TmpTime = post.taken_at,
+                                        UserId = post.user.pk_id != null ? post.user.pk_id : "",
+                                        Username = post.user.username != null ? post.user.username : "",
+                                        ImageUser = post.user.profile_pic_url != null ? post.user.profile_pic_url : ""
+                                    };
+                                    await SaveKafraPost(entdatakafapost);
+                                    await _bll.InsertsidemandsourcepostAsync(pos);
+                                    Utilities.WriteToBox("Lấy thành công bài viết: " + post.pk, rtbResult);
                                 }
                             }
+
                             await Task.Delay(3_000);
                             _browser.ExecuteScriptAsync("window.scrollTo(0, document.body.scrollHeight);");
                             return;
                         }
-                        Logging.Infomation("Lấy context thất bại");
+
+                        "Lấy context thất bại".Infomation();
                     }
-                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //logging.error(ex);
+                Logging.Error(ex);
             }
         }
+
+        /// <summary>
+        ///     Gửi dữ liệu vào kafka
+        /// </summary>
+        /// <param name="postDTO">kafaPostINSDTO</param>
+        /// <returns></returns>
+        private async Task SaveKafraPost(kafaPostINSDTO postDTO)
+        {
+            try
+            {
+                "Bắt đầu đẩy dữ liệu vào kafka".Warning();
+                var messagejson = postDTO.ToJson();
+                var intfag = await KafkaBll.PutOnKafkaPostINS(messagejson);
+                "Đẩy dữ liệu vào kafka thành công".Warning();
+            }
+            catch (Exception ex)
+            {
+                Logging.Error(ex);
+            }
+        }
+
         private async void btStart_Click(object sender, EventArgs e)
         {
             try
             {
                 tsStatus.Text = "Loading...";
-                if (String.IsNullOrEmpty(txtUrl.Text))
+                if (string.IsNullOrEmpty(txtUrl.Text))
                 {
-                    MessageBox.Show("Url không được để trống!!!", "Đã có lỗi xảy ra", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Url không được để trống!!!", "Đã có lỗi xảy ra", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                     return;
                 }
-                await _browser.LoadUrlAsync(txtUrl.Text);
-                await Task.Delay(3_000);
 
-                string userNameUrl = txtUrl.Text;
-                userNameUrl = userNameUrl.Replace(_dic["Domain"], "").Replace("/", "");
-                Logging.Infomation("Bắt đầu crawl dữ liệu post...");
-                _currUrl = String.Empty;
+                await _browser.LoadUrlAsync(txtUrl.Text);
+                //await Task.Delay(3_000);
+                //string userNameUrl = txtUrl.Text;
+                //userNameUrl = userNameUrl.Replace(_dic["Domain"], "").Replace("/", "");
+                //Logging.Infomation("Bắt đầu crawl dữ liệu post...");
+                //_currUrl = String.Empty;
                 //var tsk = await _contentBUS.CrawlInstagram(String.Empty, _browser, userNameUrl, lblSuccess, lblErr, rtbResult);
                 //await Task.Delay(3_000);
                 //if (tsk == State.Erorr)
@@ -177,7 +222,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 //    tsStatus.Text = "Không lấy được dữ liệu, vui lòng thử lại sau";
                 //    return;
                 //}
-                tsStatus.Text = "Đã hoàn tất";
+                //tsStatus.Text = "Đã hoàn tất";
             }
             catch (Exception ex)
             {
@@ -185,6 +230,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 Logging.Error(ex);
             }
         }
+
         private void btShowDevTool_Click(object sender, EventArgs e)
         {
             _browser.ShowDevTools();

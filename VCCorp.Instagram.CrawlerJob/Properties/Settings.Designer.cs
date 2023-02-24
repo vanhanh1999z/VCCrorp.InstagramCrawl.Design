@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VCCorp_Crawler_si_demand_source_INS.Properties {
+namespace VCCorp.Instagram.CrawlerJob.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

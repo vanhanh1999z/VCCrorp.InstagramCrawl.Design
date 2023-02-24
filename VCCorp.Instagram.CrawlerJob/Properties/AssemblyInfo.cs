@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VCCorp_Crawler_si_demand_source_INS")]
+[assembly: AssemblyTitle("VCCorp.Instagram.CrawlerJob")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VCCorp_Crawler_si_demand_source_INS")]
-[assembly: AssemblyCopyright("Copyright ©  2022")]
+[assembly: AssemblyProduct("VCCorp.Instagram.CrawlerJob")]
+[assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("89ee99fc-76b1-41de-bcfe-4b0a2a4d935b")]
+[assembly: Guid("89139df2-37c4-4a45-a9ad-9fd162817395")]
 
 // Version information for an assembly consists of the following four values:
 //

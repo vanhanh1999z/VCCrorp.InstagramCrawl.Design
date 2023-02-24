@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VCCorp_Crawler_si_demand_source_INS.Properties {
+namespace VCCorp.Instagram.CrawlerJob.Properties {
     using System;
     
     
@@ -38,7 +38,7 @@ namespace VCCorp_Crawler_si_demand_source_INS.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VCCorp_Crawler_si_demand_source_INS.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VCCorp.Instagram.CrawlerJob.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

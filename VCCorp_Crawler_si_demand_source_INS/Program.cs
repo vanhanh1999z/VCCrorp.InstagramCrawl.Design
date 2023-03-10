@@ -19,7 +19,12 @@ namespace VCCorp_Crawler_si_demand_source_INS
         private static void Main()
         {
             var projectName = Assembly.GetExecutingAssembly().GetName().Name;
-            Logging.Init(projectName);
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            Logging.Init(projectName, path);
             try
             {
                 Init();
@@ -48,7 +53,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 }
                 else
                 {
-                    await "Không tìm thấy file cấu hình".ErrorAsync();
+                    //await "Không tìm thấy file cấu hình".ErrorAsync();
                     await filePath.ErrorAsync();
                 }
             }

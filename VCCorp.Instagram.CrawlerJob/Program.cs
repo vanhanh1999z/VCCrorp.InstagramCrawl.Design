@@ -18,7 +18,7 @@ namespace VCCorp.Instagram.CrawlerJob
         private static void Main()
         {
             var projectName = Assembly.GetExecutingAssembly().GetName().Name;
-            Logging.Init(projectName);
+            Logging.Init(projectName, AppDomain.CurrentDomain.BaseDirectory);
             Init();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

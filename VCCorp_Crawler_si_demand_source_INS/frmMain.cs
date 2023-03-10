@@ -49,7 +49,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                     var settings = new CefSettings();
                     settings.CachePath = pathCache;
                     settings.LogSeverity = LogSeverity.Disable;
-                    settings.CefCommandLineArgs.Add("proxy-server", IgRunTime.Config.Proxy);
+                    //settings.CefCommandLineArgs.Add("proxy-server", IgRunTime.Config.Proxy);
                     Cef.Initialize(settings);
                 }
 

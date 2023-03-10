@@ -18,6 +18,8 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
 {
     public partial class frmComment : Form
     {
+        private object lockObject = new object();
+
         private readonly INSsidemandsourcepostBUS _soucePost =
             new INSsidemandsourcepostBUS(IgRunTime.Config.CloudDbConnection.FBExce);
 
@@ -67,16 +69,16 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                         else
                             rPosts.Add(posts[i]);
 
-                    Invoke(
-                        (Action)(async () =>
-                            await CrawlStarted(_browser, string.Empty, lblTotal, lblCurrentPost, lblSuccess, lblErr,
-                                rtbResult, lPosts)
-                        ));
-                    Invoke(
-                        (Action)(async () =>
-                            await CrawlStarted(_browserR, string.Empty, lblTotalR, lblCurrR, lblSuccessR, lblErrR,
-                                rtbResultM, rPosts)
-                        ));
+                    tasks.Add(Task.Run(async () =>
+                    {
+                        await CrawlStarted(_browser, string.Empty, lblTotal, lblCurrentPost, lblSuccess, lblErr,
+                                rtbResult, lPosts);
+                    }));
+                    tasks.Add(Task.Run(async () =>
+                    {
+                        await CrawlStarted(_browserR, string.Empty, lblTotalR, lblCurrR, lblSuccessR, lblErrR,
+                                rtbResultM, rPosts);
+                    }));
                 }
             }
             catch (Exception ex)
@@ -119,7 +121,6 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                     stState.Text = "Đã hoàn tất!";
                     return;
                 }
-
                 stState.Text = "Đã có sự cố xảy ra, vui lòng kiểm ra lại!";
             }
             catch (Exception ex)
@@ -207,7 +208,6 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
         private void frmComment_Load(object sender, EventArgs e)
         {
         }
-
         private void frmComment_FormClosed(object sender, FormClosedEventArgs e)
         {
         }

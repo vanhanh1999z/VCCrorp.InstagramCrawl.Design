@@ -83,11 +83,7 @@ namespace VCCorp_Crawler_si_demand_source_INS
                 pnView.Controls.Add(_browser);
                 _browser.LoadingStateChanged += async (sender, args) =>
                 {
-                    var script = Request.LoadScriptJs().Result;
-                    _browser.ExecuteScriptAsync(script);
-                    var devtool = _browser.GetDevToolsClient();
-                    await devtool.Network.EnableAsync();
-                    devtool.Network.RequestWillBeSent += Network_RequestWillBeSent;
+                    
                 };
             }
             catch (Exception ex)
@@ -102,13 +98,13 @@ namespace VCCorp_Crawler_si_demand_source_INS
             try
             {
                 var devtool = _browser.GetDevToolsClient();
-
                 if (e.Request.Method == "GET" && e.Request.Url.StartsWith(_dic["UrlPost"]))
                     if (e.Request.Url.Equals(_currUrl) == false)
                     {
+                        "Bắt url!".Infomation();
                         _currUrl = e.Request.Url;
                         var reqId = e.RequestId;
-                        await Task.Delay(2500);
+                        await Task.Delay(3500);
                         var res = await devtool.Network.GetResponseBodyAsync(reqId);
                         if (res != null && res.Body != null)
                         {
@@ -236,8 +232,14 @@ namespace VCCorp_Crawler_si_demand_source_INS
             _browser.ShowDevTools();
         }
 
-        private void frmContentPost_Load(object sender, EventArgs e)
+        private async void frmContentPost_Load(object sender, EventArgs e)
         {
+            await Task.Delay(2_000);
+            var script = Request.LoadScriptJs().Result;
+            _browser.ExecuteScriptAsync(script);
+            var devtool = _browser.GetDevToolsClient();
+            await devtool.Network.EnableAsync();
+            devtool.Network.RequestWillBeSent += Network_RequestWillBeSent;
         }
     }
 }

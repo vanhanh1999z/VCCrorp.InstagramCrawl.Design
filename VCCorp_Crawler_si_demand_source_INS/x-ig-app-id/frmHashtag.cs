@@ -20,7 +20,6 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
 {
     public partial class frmHashtag : Form
     {
-        private readonly INSsihashtagBUS _bll = new INSsihashtagBUS(IgRunTime.Config.CloudDbConnection.FBExce);
         private readonly HashtagBUS _hashtagBUS = new HashtagBUS();
         private ChromiumWebBrowser _browser;
 
@@ -145,7 +144,7 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
                             stStatus);
                         if (state == LoopState.Continue || state == LoopState.Ok)
                         {
-                            await _bll.UpdateTimeHashtagAsync(tag.Id, DateTime.Now);
+                            await new INSsihashtagBUS(IgRunTime.Config.CloudDbConnection.FBExce).UpdateTimeHashtagAsync(tag.Id, DateTime.Now);
                             $"Update {tag.Id} thời gian:  {DateTime.Now}".Infomation();
                             continue;
                         }
@@ -167,7 +166,7 @@ namespace VCCorp_Crawler_si_demand_source_INS.x_ig_app_id
         public async Task<List<HashtagDTO.SiHashtag>> GetHashtagAsync()
         {
             if (String.IsNullOrEmpty(lblQuery.Text)) return null;
-            var lstHashtag = await _bll.GetHashtags(lblQuery.Text);
+            var lstHashtag = await new INSsihashtagBUS(IgRunTime.Config.CloudDbConnection.FBExce).GetHashtags(lblQuery.Text);
             for (var i = 0; i < lstHashtag.Count; i++)
             {
                 var rawHashtag = lstHashtag[i].Hashtag;

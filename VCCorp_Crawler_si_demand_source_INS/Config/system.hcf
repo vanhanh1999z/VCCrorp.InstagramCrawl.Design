@@ -8,6 +8,9 @@
     "ServerName": "192.168.23.22,3306",
     "User": "hanhlv",
     "Password": "ThhZWCHaEP4jZmrYZpW9ho2OQ9TQ9MnpKWLY8yHyfAwEsUlyItLabz5n9ZSvJz/L8CVNmK02jLfiw4p1ZjikDULn+B/06GcvzUGds4SbtdlLkqMxn6WXDrbdie472FVi"
+    //"ServerName": "localhost,3306",
+    //"User": "root",
+    //"Password": "IjsholfmbIL6kqGZTjMSXnCyOUWJso5COLS4K2s2tOpzhvvSHOBf0LQqLoLhFeyQaaQb+DSXJuKjp5NmyzOYVGtNWnjgkYVwkIjabIt4oczA63ZOZMgPNScyZSej/Vel"
   },
   "Kafka": {
     "_topicTableName": "datacollection-instagram-crawler",
